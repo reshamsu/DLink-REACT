@@ -6,12 +6,12 @@ import Listings from "../components/homepage/Listings";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Hero />
       <Analytics />
       <Product />
       <Listings />
-    </div>
+    </>
   );
 };
 
