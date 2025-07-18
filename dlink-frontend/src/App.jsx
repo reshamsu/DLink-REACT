@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/homepage/Hero";
-import Listings from "./components/homepage/Listings";
+import Home from "./pages/Home";
 // import Footer from "./components/Footer";
 
 function App() {
@@ -10,8 +9,8 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Hero />
-      <Listings />
+      <Home />
+      {/* <Listings /> */}
     </div>
   );
 }
