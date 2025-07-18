@@ -126,13 +126,13 @@ const Navbar = () => {
             <li className="p-4 border-b border-gray-100">
               <Link to="/about" className="cursor-pointer block">About</Link>
             </li>
-            <li className="p-4 border-b border-gray-100">
+            <li className="p-4">
               <Link to="/contact" className="cursor-pointer block">Contact</Link>
             </li>
             <li className="p-4">
               <Link
                 to="/login"
-                className="block w-full text-center px-6 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
+                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
               >
                 Login
               </Link>
