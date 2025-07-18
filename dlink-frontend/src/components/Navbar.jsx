@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { PiHouseLineFill } from "react-icons/pi";
 import { MdApartment } from "react-icons/md";
@@ -8,9 +9,7 @@ import { RiLandscapeFill } from "react-icons/ri";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const handleNav = () => {
-    setNav(!nav);
-  };
+  const handleNav = () => setNav(!nav);
 
   return (
     <div className="bg-white text-gray-700">
@@ -22,141 +21,121 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex hover: duration-500 transition">
           <li className="p-6">
-            <a href="/" className="flex items-center hover:text-[#df8600]">
+            <Link to="/" className="flex items-center hover:text-[#df8600] cursor-pointer">
               Home
-            </a>
+            </Link>
           </li>
 
           <li className="p-6 relative group">
             <div className="flex items-center hover:text-[#df8600] cursor-pointer">
               Find Property
             </div>
-            <div className="absolute top-16 left-0 bg-white shadow-xl rounded-xl p-6 hidden group-hover:block z-40 min-w-[248px] border-1 border-gray-100">
+            <div className="absolute top-16 left-0 bg-white shadow-xl rounded-xl p-6 hidden group-hover:block z-40 min-w-[248px] border border-gray-100">
               <ul className="space-y-4 text-md font-medium text-gray-700">
                 <li>
-                  <a
-                    href="/property/apartments"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
-                  >
+                  <Link to="/property/apartments" className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer">
                     <MdApartment size={24} />
                     Apartments
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/property/houses"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
-                  >
+                  <Link to="/property/houses" className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer">
                     <BsFillHousesFill size={22} />
                     Houses
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/property/villas"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
-                  >
+                  <Link to="/property/villas" className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer">
                     <PiHouseLineFill size={22} />
                     Villas
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/property/commercial-properties"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
-                  >
+                  <Link to="/property/commercial-properties" className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer">
                     <FaBuilding size={22} />
                     Commercial Properties
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/property/lands-plots"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
-                  >
+                  <Link to="/property/lands-plots" className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer">
                     <RiLandscapeFill size={22} />
                     Lands / Plots
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </li>
 
           <li className="p-6">
-            <a href="/about" className="flex items-center hover:text-[#df8600]">
+            <Link to="/about" className="flex items-center hover:text-[#df8600] cursor-pointer">
               About
-            </a>
+            </Link>
           </li>
           <li className="p-6">
-            <a
-              href="/contact"
-              className="flex items-center hover:text-[#df8600]"
-            >
+            <Link to="/contact" className="flex items-center hover:text-[#df8600] cursor-pointer">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
         {/* Desktop Login Button */}
         <div className="hidden md:block">
-          <a
-            href="/login"
-            className="px-6 py-2.5 ml-22 rounded-xl flex items-center text-center text-white bg-[#df8600] hover:bg-[#df9800e8]"
+          <Link
+            to="/login"
+            className="px-6 py-2.5 ml-22 rounded-xl flex items-center text-center text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
           >
             Login
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div onClick={handleNav} className="block md:hidden relative z-50">
-          {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={22} />}
+        <div onClick={handleNav} className="block md:hidden relative z-50 cursor-pointer text-[#df8600]">
+          {nav ? <AiOutlineClose size={26} /> : <AiOutlineMenu size={26} />}
         </div>
 
         {/* Mobile Sidebar */}
         <div
           className={`${
             nav
-              ? "fixed left-0 top-0 w-[60%] h-full border-l border-l-gray-800 bg-white ease-in-out duration-500 z-[999]"
+              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white ease-in-out duration-500 z-[999]"
               : "fixed right-[-100%] z-[999]"
           }`}
         >
           <h1 className="w-full text-2xl font-bold text-[#df8600] px-8 py-8">
             D-Link <span className="text-[18px]">Colombo</span>
           </h1>
-          <ul className="px-4">
+          <ul className="px-4 font-medium">
             <li className="p-4 border-b border-gray-100">
-              <a href="/">Home</a>
+              <Link to="/" className="cursor-pointer block">Home</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/property/apartments">Apartments</a>
+              <Link to="/property/apartments" className="cursor-pointer block">Apartments</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/property/houses">Houses</a>
+              <Link to="/property/houses" className="cursor-pointer block">Houses</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/property/villas">Villas</a>
+              <Link to="/property/villas" className="cursor-pointer block">Villas</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/property/commercial-properties">
-                Commercial Properties
-              </a>
+              <Link to="/property/commercial-properties" className="cursor-pointer block">Commercial Properties</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/property/lands-plots">Lands / Plots</a>
+              <Link to="/property/lands-plots" className="cursor-pointer block">Lands / Plots</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/about">About</a>
+              <Link to="/about" className="cursor-pointer block">About</Link>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <a href="/contact">Contact</a>
+              <Link to="/contact" className="cursor-pointer block">Contact</Link>
             </li>
             <li className="p-4">
-              <a
-                href="/login"
-                className="block w-full text-center px-6 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8]"
+              <Link
+                to="/login"
+                className="block w-full text-center px-6 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
               >
                 Login
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
