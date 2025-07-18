@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Apartments from "./pages/Apartments";
 import Houses from "./pages/Houses";
 import Villas from "./pages/Villas";
-import Commercial from "./pages/commercial";
+import Commercial from "./pages/Commercial";
 import Lands from "./pages/Lands";
 
 function App() {
