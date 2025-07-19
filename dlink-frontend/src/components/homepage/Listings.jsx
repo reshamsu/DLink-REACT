@@ -88,7 +88,11 @@ const Listings = () => {
   return (
     <>
       <div className="max-w-[1260px] mx-auto px-6 md:px-4 py-12 text-gray-800">
-        <h1 className="text-2xl font-semibold mb-8">View all Listings</h1>
+        <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
+          <h1 className="text-2xl font-semibold mb-4 md:mb-0">Featured Listings</h1>
+          <input type="text" placeholder="Find Listing" className="border-2 border-gray-100 px-6 py-2.5 md:w-3xs w-full rounded-full"/>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {listingsData.map((listing) => (
             <div
@@ -117,8 +121,6 @@ const Listings = () => {
           ))}
         </div>
       </div>
-
-
     </>
   );
 };

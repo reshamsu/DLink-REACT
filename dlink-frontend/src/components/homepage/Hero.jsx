@@ -5,7 +5,7 @@ import { ReactTyped } from "react-typed";
 const Hero = () => {
   return (
     <div className="bg-white">
-      <div className="relative max-w-[1240px] mx-auto h-[70vh] rounded-b-none md:rounded-3xl overflow-hidden">
+      <div className="relative max-w-[1240px] mx-auto md:h-[70vh] h-[50vh] rounded-b-none md:rounded-3xl overflow-hidden">
         {/* Background Image */}
         <img src={Banner} alt="Hero" className="w-full h-full object-cover" />
 
