@@ -1,5 +1,5 @@
 import React from "react";
-import Property from "../../assets/property.jpeg";
+import Property from "../../assets/property.jpg";
 import { motion } from "framer-motion";
 
 const listingsData = [

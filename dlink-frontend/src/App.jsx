@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Apartments from "./pages/Apartments";
 import Houses from "./pages/Houses";
@@ -21,11 +22,14 @@ function App() {
           <Route path="/property/apartments" element={<Apartments />} />
           <Route path="/property/houses" element={<Houses />} />
           <Route path="/property/villas" element={<Villas />} />
-          <Route path="/property/commercial-properties" element={<Commercial />} />
+          <Route
+            path="/property/commercial-properties"
+            element={<Commercial />}
+          />
           <Route path="/property/lands-plots" element={<Lands />} />
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );

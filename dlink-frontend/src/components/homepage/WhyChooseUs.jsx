@@ -50,7 +50,7 @@ const WhyChooseUs = () => {
               <p className="text-[#f09712] text-lg font-bold mb-3">
                 OUR EXPERTISE
               </p>
-              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold mb-4">
+              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold mb-6">
                 Why Choose Us?
               </h1>
               <p className="text-sm text-gray-500 max-w-md mx-auto">
@@ -97,7 +97,7 @@ const WhyChooseUs = () => {
                   {item.icon}
                   <div>
                     <h2 className="text-lg font-semibold mb-1">{item.title}</h2>
-                    <p className="text-sm text-gray-500">{item.text}</p>
+                    <p className="text-xs md:text-md lg:text-sm text-gray-600">{item.text}</p>
                   </div>
                 </motion.div>
               ))}
