@@ -12,7 +12,6 @@ const Hero = () => {
 
   return (
     <div className="relative w-full pt-[88px] h-[calc(100vh-88px)] overflow-hidden">
-      {/* Background with Dark Overlay as One */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{
@@ -20,9 +19,8 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Foreground Content */}
       <div
-        className={`relative z-10 flex flex-col justify-center items-center text-gray-300 h-full px-6 space-y-6 transition-all duration-2000 ease-out ${
+        className={`relative z-10 flex flex-col justify-center items-center text-gray-100 h-full px-6 space-y-6 transition-all duration-2000 ease-out ${
           animate ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
         }`}
       >
@@ -36,7 +34,7 @@ const Hero = () => {
             loop
           />
         </div>
-        <p className="text-xl font-semibold text-gray-300">Find the Perfect Place for your Needs.</p>
+        <p className="text-md md:text-xl font-semibold text-gray-300">Locating the perfect place for your Needs.</p>
         <input
           type="text"
           placeholder="Search by location or property type"

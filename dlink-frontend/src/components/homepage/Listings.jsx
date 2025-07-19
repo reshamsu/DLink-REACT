@@ -3,16 +3,86 @@ import Property from "../../assets/property.jpeg";
 import { motion } from "framer-motion";
 
 const listingsData = [
-  { id: 1, title: "Modern Apartment", location: "Colombo 2", type: "Apartment", status: "Ready to Move-In", image: Property },
-  { id: 2, title: "Luxury Condo", location: "Colombo 5", type: "House", status: "Available Soon", image: Property },
-  { id: 3, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
-  { id: 4, title: "Modern Apartment", location: "Colombo 2", type: "House", status: "Ready to Move-In", image: Property },
-  { id: 5, title: "Luxury Condo", location: "Colombo 5", type: "Apartment", status: "Available Soon", image: Property },
-  { id: 6, title: "City View Flat", location: "Colombo 7", type: "House", status: "Ready to Move-In", image: Property },
-  { id: 7, title: "Modern Apartment", location: "Colombo 2", type: "Apartment", status: "Ready to Move-In", image: Property },
-  { id: 8, title: "Luxury Condo", location: "Colombo 5", type: "House", status: "Available Soon", image: Property },
-  { id: 9, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
-  { id: 10, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
+  {
+    id: 1,
+    title: "Modern Apartment",
+    location: "Colombo 2",
+    type: "Apartment",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 2,
+    title: "Luxury Condo",
+    location: "Colombo 5",
+    type: "House",
+    status: "Available Soon",
+    image: Property,
+  },
+  {
+    id: 3,
+    title: "City View Flat",
+    location: "Colombo 7",
+    type: "Apartment",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 4,
+    title: "Modern Apartment",
+    location: "Colombo 2",
+    type: "House",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 5,
+    title: "Luxury Condo",
+    location: "Colombo 5",
+    type: "Apartment",
+    status: "Available Soon",
+    image: Property,
+  },
+  {
+    id: 6,
+    title: "City View Flat",
+    location: "Colombo 7",
+    type: "House",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 7,
+    title: "Modern Apartment",
+    location: "Colombo 2",
+    type: "Apartment",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 8,
+    title: "Luxury Condo",
+    location: "Colombo 5",
+    type: "House",
+    status: "Available Soon",
+    image: Property,
+  },
+  {
+    id: 9,
+    title: "City View Flat",
+    location: "Colombo 7",
+    type: "Apartment",
+    status: "Ready to Move-In",
+    image: Property,
+  },
+  {
+    id: 10,
+    title: "City View Flat",
+    location: "Colombo 7",
+    type: "Apartment",
+    status: "Ready to Move-In",
+    image: Property,
+  },
 ];
 
 // Split listings into rows (5 cards per row for xl:grid-cols-5)
@@ -40,7 +110,13 @@ const Listings = () => {
   return (
     <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
       <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
-        <h1 className="text-2xl font-semibold mb-4 md:mb-0">Featured Listings</h1>
+        <div>
+          <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
+          <h1 className="text-2xl font-semibold mb-6 md:mb-0">
+            Featured Listings
+          </h1>
+        </div>
+
         <input
           type="text"
           placeholder="Find Listing"
@@ -56,7 +132,7 @@ const Listings = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={rowVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-6"
         >
           {row.map((listing) => (
             <div
@@ -72,10 +148,14 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <a href="/" className="text-md font-semibold">{listing.title}</a>
+                <a href="/" className="text-md font-semibold">
+                  {listing.title}
+                </a>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
                 <p className="text-sm text-gray-500 mb-2">{listing.type}</p>
-                <span className="inline-block bg-[bisque] text-xs font-medium px-3 py-2 rounded-lg">{listing.status}</span>
+                <span className="inline-block bg-[bisque] text-[11px] font-medium px-3 py-1.5 rounded-lg">
+                  {listing.status}
+                </span>
               </div>
             </div>
           ))}
