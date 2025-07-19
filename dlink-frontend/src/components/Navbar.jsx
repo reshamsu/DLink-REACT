@@ -20,8 +20,8 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-700">
       <div className="flex justify-between items-center h-22 max-w-[1240px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
-        <NavLink to="/" className="flex items-center hover:text-[#df8600]">
-          <h1 className="w-fit text-2xl font-bold text-[#df8600]">
+        <NavLink to="/" className="flex items-center hover:text-[#f09712]">
+          <h1 className="w-fit text-2xl font-bold text-[#f09712]">
             D-LINK <span className="text-[18px]">Colombo</span>
           </h1>
         </NavLink>
@@ -38,8 +38,8 @@ const Navbar = () => {
             <div
               className={`flex items-center cursor-pointer ${
                 isPropertyPage
-                  ? "text-[#df8600] font-semibold"
-                  : "hover:text-[#df8600]"
+                  ? "text-[#f09712] font-semibold"
+                  : "hover:text-[#f09712]"
               }`}
             >
               Find Property
@@ -49,7 +49,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/property/apartments"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
+                    className="flex items-center gap-2 hover:text-[#f09712]"
                   >
                     <MdApartment size={22} />
                     <span>Apartments</span>
@@ -58,7 +58,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/property/houses"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
+                    className="flex items-center gap-2 hover:text-[#f09712]"
                   >
                     <BsFillHousesFill size={20} />
                     <span>Houses</span>
@@ -67,7 +67,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/property/villas"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
+                    className="flex items-center gap-2 hover:text-[#f09712]"
                   >
                     <PiHouseLineFill size={20} />
                     <span>Villas</span>
@@ -76,7 +76,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/property/commercial-properties"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
+                    className="flex items-center gap-2 hover:text-[#f09712]"
                   >
                     <FaBuilding size={20} />
                     <span>Commercial Properties</span>
@@ -85,7 +85,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/property/lands-plots"
-                    className="flex items-center gap-2 hover:text-[#df8600]"
+                    className="flex items-center gap-2 hover:text-[#f09712]"
                   >
                     <RiLandscapeFill size={20} />
                     <span>Lands / Plots</span>
@@ -111,7 +111,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/login"
-            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-xl flex items-center text-center text-white bg-[#df8600] hover:bg-[#df9800e8]"
+            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-xl flex items-center text-center text-white bg-[#f09712] hover:bg-[#dfa400e8]"
           >
             Sign In
           </NavLink>
@@ -120,7 +120,7 @@ const Navbar = () => {
         {/* Mobile Menu Toggle */}
         <div
           onClick={handleNav}
-          className="block md:hidden relative z-50 cursor-pointer text-[#df8600]"
+          className="block md:hidden relative z-50 cursor-pointer text-[#f09712]"
         >
           {nav ? <AiOutlineClose size={26} /> : <AiOutlineMenu size={26} />}
         </div>
@@ -133,7 +133,7 @@ const Navbar = () => {
               : "fixed right-[-100%] z-[999]"
           }`}
         >
-          <h1 className="w-full text-2xl font-bold text-[#df8600] px-8 py-8">
+          <h1 className="w-full text-2xl font-bold text-[#f09712] px-8 py-8">
             D-Link <span className="text-[18px]">Colombo</span>
           </h1>
           <ul className="px-4 font-medium">
@@ -183,7 +183,7 @@ const Navbar = () => {
             <li className="p-4">
               <NavLink
                 to="/login"
-                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8]"
+                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#f09712] hover:bg-[#dfa400e8]"
               >
                 Login
               </NavLink>

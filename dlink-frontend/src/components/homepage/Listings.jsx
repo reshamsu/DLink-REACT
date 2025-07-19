@@ -1,100 +1,64 @@
 import React from "react";
 import Property from "../../assets/property.jpeg";
+import { motion } from "framer-motion";
 
 const listingsData = [
-  {
-    id: 1,
-    title: "Modern Apartment",
-    location: "Colombo 2",
-    type: "Apartment",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 2,
-    title: "Luxury Condo",
-    location: "Colombo 5",
-    type: "House",
-    status: "Available Soon",
-    image: Property,
-  },
-  {
-    id: 3,
-    title: "City View Flat",
-    location: "Colombo 7",
-    type: "Apartment",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 4,
-    title: "Modern Apartment",
-    location: "Colombo 2",
-    type: "House",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 5,
-    title: "Luxury Condo",
-    location: "Colombo 5",
-    type: "Apartment",
-    status: "Available Soon",
-    image: Property,
-  },
-  {
-    id: 6,
-    title: "City View Flat",
-    location: "Colombo 7",
-    type: "House",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 7,
-    title: "Modern Apartment",
-    location: "Colombo 2",
-    type: "Apartment",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 8,
-    title: "Luxury Condo",
-    location: "Colombo 5",
-    type: "House",
-    status: "Available Soon",
-    image: Property,
-  },
-  {
-    id: 9,
-    title: "City View Flat",
-    location: "Colombo 7",
-    type: "Apartment",
-    status: "Ready to Move-In",
-    image: Property,
-  },
-  {
-    id: 10,
-    title: "City View Flat",
-    location: "Colombo 7",
-    type: "Apartment",
-    status: "Ready to Move-In",
-    image: Property,
-  },
+  { id: 1, title: "Modern Apartment", location: "Colombo 2", type: "Apartment", status: "Ready to Move-In", image: Property },
+  { id: 2, title: "Luxury Condo", location: "Colombo 5", type: "House", status: "Available Soon", image: Property },
+  { id: 3, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
+  { id: 4, title: "Modern Apartment", location: "Colombo 2", type: "House", status: "Ready to Move-In", image: Property },
+  { id: 5, title: "Luxury Condo", location: "Colombo 5", type: "Apartment", status: "Available Soon", image: Property },
+  { id: 6, title: "City View Flat", location: "Colombo 7", type: "House", status: "Ready to Move-In", image: Property },
+  { id: 7, title: "Modern Apartment", location: "Colombo 2", type: "Apartment", status: "Ready to Move-In", image: Property },
+  { id: 8, title: "Luxury Condo", location: "Colombo 5", type: "House", status: "Available Soon", image: Property },
+  { id: 9, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
+  { id: 10, title: "City View Flat", location: "Colombo 7", type: "Apartment", status: "Ready to Move-In", image: Property },
 ];
 
-const Listings = () => {
-  return (
-    <>
-      <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
-        <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
-          <h1 className="text-2xl font-semibold mb-4 md:mb-0">Featured Listings</h1>
-          <input type="text" placeholder="Find Listing" className="border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#df8600] px-6 py-2.5 md:w-3xs w-full rounded-full"/>
-        </div>
+// Split listings into rows (5 cards per row for xl:grid-cols-5)
+const chunkIntoRows = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+    arr.slice(i * size, i * size + size)
+  );
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {listingsData.map((listing) => (
+const rowVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
+const Listings = () => {
+  const rows = chunkIntoRows(listingsData, 5);
+
+  return (
+    <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
+      <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
+        <h1 className="text-2xl font-semibold mb-4 md:mb-0">Featured Listings</h1>
+        <input
+          type="text"
+          placeholder="Find Listing"
+          className="border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#f09712] px-6 py-2.5 md:w-3xs w-full rounded-full"
+        />
+      </div>
+
+      {rows.map((row, rowIndex) => (
+        <motion.div
+          key={rowIndex}
+          custom={rows.length - rowIndex - 1} // reverse order for bottom-to-top
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={rowVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-4"
+        >
+          {row.map((listing) => (
             <div
               key={listing.id}
               className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl"
@@ -103,25 +67,21 @@ const Listings = () => {
                 <img
                   src={listing.image}
                   alt={listing.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
                 />
-                <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <a href="/" className="text-md font-semibold">
-                  {listing.title}
-                </a>
+                <a href="/" className="text-md font-semibold">{listing.title}</a>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
                 <p className="text-sm text-gray-500 mb-2">{listing.type}</p>
-                <span className="inline-block bg-[bisque] text-xs font-medium px-3 py-2 rounded-lg">
-                  {listing.status}
-                </span>
+                <span className="inline-block bg-[bisque] text-xs font-medium px-3 py-2 rounded-lg">{listing.status}</span>
               </div>
             </div>
           ))}
-        </div>
-      </div>
-    </>
+        </motion.div>
+      ))}
+    </div>
   );
 };
 
