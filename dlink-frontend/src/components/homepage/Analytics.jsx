@@ -25,7 +25,7 @@ const Analytics = () => {
         <div className="mb-8 px-2">
           <p className="text-[#df8600] font-semibold mb-2">SERVICE</p>
           <h1 className="text-2xl md:text-3xl font-semibold mb-2">What we do</h1>
-          <p className="font-semibold text-gray-500">
+          <p className="text-sm md:text-md font-semibold text-gray-500">
             Full-Service Agents, Modern Technology
           </p>
         </div>
