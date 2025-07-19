@@ -11,7 +11,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative w-full pt-[88px] h-[calc(100vh-88px)] overflow-hidden">
+    <div className="relative w-full pt-[88px] h-[64vh] md:h-[100vh] overflow-hidden">
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{
@@ -28,7 +28,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-5xl font-bold">Find&nbsp;</h1>
           <ReactTyped
             className="text-4xl md:text-5xl font-bold text-[#f09712]"
-            strings={["Houses", "Apartments", "Villas", "Lands"]}
+            strings={["Homes", "Apartments", "Villas", "Lands"]}
             typeSpeed={120}
             backSpeed={80}
             loop

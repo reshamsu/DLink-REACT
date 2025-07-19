@@ -1,16 +1,16 @@
 import React from "react";
 import { FaSearchLocation, FaCity, FaHandshake } from "react-icons/fa";
-import banner2 from "../../assets/banner.jpg";
+import Banner2 from "../../assets/banner2.jpg";
 
 const WhyChooseUs = () => {
   return (
     <div className="bg-gray-950 text-gray-50">
-      <div className="max-w-[1240px] mx-auto px-4 py-14">
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-14 py-8">
+      <div className="max-w-[1240px] mx-auto px-8 md:px-8 lg:px-6 py-14">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-8 lg:gap-14 md:gap-4 py-8">
           {/* Image with dark overlay */}
-          <div className="relative w-full h-[80vh]">
+          <div className="relative w-full h-[80vh] hidden md:block">
             <img
-              src={banner2}
+              src={Banner2}
               alt="Why Choose Us"
               className="object-cover w-full h-full rounded-t-[400px] rounded-b-[20px] shadow-lg"
             />
@@ -23,7 +23,7 @@ const WhyChooseUs = () => {
               <p className="text-[#f09712] text-lg font-bold mb-3">
                 OUR EXPERTISE
               </p>
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold mb-4">
                 Why Choose Us?
               </h1>
               <p className="text-sm text-gray-500 max-w-md mx-auto">
