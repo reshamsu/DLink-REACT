@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
-              className="mb-12 text-center"
+              className="mb-14 text-center"
             >
               <p className="text-[#f09712] text-lg font-bold mb-3">
                 OUR EXPERTISE
@@ -61,20 +61,26 @@ const WhyChooseUs = () => {
             </motion.div>
 
             {/* Highlights */}
-            <div className="flex flex-col gap-8 w-full">
-              {[ 
+            <div className="flex flex-col gap-10 w-full">
+              {[
                 {
-                  icon: <FaSearchLocation className="text-[#f09712] text-6xl" />,
+                  icon: (
+                    <FaSearchLocation className="text-[#f09712] text-6xl md:text-7xl" />
+                  ),
                   title: "Personalized Property Search",
                   text: "We tailor each property search to match your unique needs, preferences, and budget—no guesswork, just results.",
                 },
                 {
-                  icon: <FaCity className="text-[#f09712] text-6xl" />,
+                  icon: (
+                    <FaCity className="text-[#f09712] text-6xl md:text-7xl" />
+                  ),
                   title: "Prime Listings in Colombo",
                   text: "Gain access to verified, high-value properties across the most sought-after locations in Colombo and beyond.",
                 },
                 {
-                  icon: <FaHandshake className="text-[#f09712] text-6xl" />,
+                  icon: (
+                    <FaHandshake className="text-[#f09712] text-6xl md:text-7xl" />
+                  ),
                   title: "Trusted Guidance & Support",
                   text: "From first viewing to final paperwork, our expert team is by your side—transparent, responsive, and reliable.",
                 },
@@ -86,7 +92,7 @@ const WhyChooseUs = () => {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeInUp}
-                  className="flex items-start gap-8"
+                  className="flex items-start gap-6 lg:gap-10"
                 >
                   {item.icon}
                   <div>
