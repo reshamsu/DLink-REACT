@@ -86,7 +86,7 @@ const listingsData = [
 
 const Listings = () => {
   return (
-    <div className="max-w-[1240px] mx-auto px-6 pt-33 md:px-0 py-12 text-gray-800">
+    <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800 pt-33">
       <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
         <h1 className="text-2xl font-semibold mb-4 md:mb-0">
           Explore Commercial Properties

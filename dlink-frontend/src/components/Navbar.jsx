@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { PiHouseLineFill } from "react-icons/pi";
 import { MdApartment } from "react-icons/md";
@@ -9,112 +9,112 @@ import { RiLandscapeFill } from "react-icons/ri";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const location = useLocation();
   const handleNav = () => setNav(!nav);
+
+  const linkClass = ({ isActive }) =>
+    isActive ? "text-[#df8600] font-semibold" : "hover:text-[#df8600]";
+
+  const isPropertyPage = location.pathname.startsWith("/property");
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-700">
-      <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto font-semibold">
-        <Link
-          to="/"
-          className="flex items-center hover:text-[#df8600] cursor-pointer"
-        >
+      <div className="flex justify-between items-center h-22 max-w-[1240px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
+        <NavLink to="/" className="flex items-center hover:text-[#df8600]">
           <h1 className="w-fit text-2xl font-bold text-[#df8600]">
             D-LINK <span className="text-[18px]">Colombo</span>
           </h1>
-        </Link>
+        </NavLink>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex hover: duration-500 transition">
           <li className="p-6">
-            <Link
-              to="/"
-              className="flex items-center hover:text-[#df8600] cursor-pointer"
-            >
+            <NavLink to="/" className={linkClass}>
               Home
-            </Link>
+            </NavLink>
           </li>
 
           <li className="p-6 relative group">
-            <div className="flex items-center hover:text-[#df8600] cursor-pointer">
+            <div
+              className={`flex items-center cursor-pointer ${
+                isPropertyPage
+                  ? "text-[#df8600] font-semibold"
+                  : "hover:text-[#df8600]"
+              }`}
+            >
               Find Property
             </div>
-            <div className="absolute top-16 left-0 bg-white shadow-xl rounded-xl p-6 hidden group-hover:block z-40 min-w-[248px] border border-gray-100">
+            <div className="absolute top-16 left-0 bg-white shadow-xl rounded-xl p-6 hidden group-hover:block z-40 min-w-[260px] border border-gray-100">
               <ul className="space-y-4 text-md font-medium text-gray-700">
                 <li>
-                  <Link
+                  <NavLink
                     to="/property/apartments"
-                    className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer"
+                    className="flex items-center gap-2 hover:text-[#df8600]"
                   >
-                    <MdApartment size={24} />
-                    Apartments
-                  </Link>
+                    <MdApartment size={22} />
+                    <span>Apartments</span>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/property/houses"
-                    className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer"
+                    className="flex items-center gap-2 hover:text-[#df8600]"
                   >
-                    <BsFillHousesFill size={22} />
-                    Houses
-                  </Link>
+                    <BsFillHousesFill size={20} />
+                    <span>Houses</span>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/property/villas"
-                    className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer"
+                    className="flex items-center gap-2 hover:text-[#df8600]"
                   >
-                    <PiHouseLineFill size={22} />
-                    Villas
-                  </Link>
+                    <PiHouseLineFill size={20} />
+                    <span>Villas</span>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/property/commercial-properties"
-                    className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer"
+                    className="flex items-center gap-2 hover:text-[#df8600]"
                   >
-                    <FaBuilding size={22} />
-                    Commercial Properties
-                  </Link>
+                    <FaBuilding size={20} />
+                    <span>Commercial Properties</span>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/property/lands-plots"
-                    className="flex items-center gap-2 hover:text-[#df8600] cursor-pointer"
+                    className="flex items-center gap-2 hover:text-[#df8600]"
                   >
-                    <RiLandscapeFill size={22} />
-                    Lands / Plots
-                  </Link>
+                    <RiLandscapeFill size={20} />
+                    <span>Lands / Plots</span>
+                  </NavLink>
                 </li>
               </ul>
             </div>
           </li>
 
           <li className="p-6">
-            <Link
-              to="/about"
-              className="flex items-center hover:text-[#df8600] cursor-pointer"
-            >
+            <NavLink to="/about" className={linkClass}>
               About
-            </Link>
+            </NavLink>
           </li>
           <li className="p-6">
-            <Link
-              to="/contact"
-              className="flex items-center hover:text-[#df8600] cursor-pointer"
-            >
+            <NavLink to="/contact" className={linkClass}>
               Contact
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
         {/* Desktop Login Button */}
         <div className="hidden md:block">
-          <Link
+          <NavLink
             to="/login"
-            className="px-6 py-2.5 ml-12 rounded-xl flex items-center text-center text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
+            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-xl flex items-center text-center text-white bg-[#df8600] hover:bg-[#df9800e8]"
           >
             Sign In
-          </Link>
+          </NavLink>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -138,55 +138,55 @@ const Navbar = () => {
           </h1>
           <ul className="px-4 font-medium">
             <li className="p-4 border-b border-gray-100">
-              <Link to="/" className="cursor-pointer block">
+              <NavLink to="/" className={linkClass}>
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link to="/property/apartments" className="cursor-pointer block">
+              <NavLink to="/property/apartments" className={linkClass}>
                 Apartments
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link to="/property/houses" className="cursor-pointer block">
+              <NavLink to="/property/houses" className={linkClass}>
                 Houses
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link to="/property/villas" className="cursor-pointer block">
+              <NavLink to="/property/villas" className={linkClass}>
                 Villas
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link
+              <NavLink
                 to="/property/commercial-properties"
-                className="cursor-pointer block"
+                className={linkClass}
               >
-                Commercial Properties
-              </Link>
+                Commercial
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link to="/property/lands-plots" className="cursor-pointer block">
+              <NavLink to="/property/lands-plots" className={linkClass}>
                 Lands / Plots
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <Link to="/about" className="cursor-pointer block">
+              <NavLink to="/about" className={linkClass}>
                 About
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4">
-              <Link to="/contact" className="cursor-pointer block">
+              <NavLink to="/contact" className={linkClass}>
                 Contact
-              </Link>
+              </NavLink>
             </li>
             <li className="p-4">
-              <Link
+              <NavLink
                 to="/login"
-                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8] cursor-pointer"
+                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#df8600] hover:bg-[#df9800e8]"
               >
                 Login
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
