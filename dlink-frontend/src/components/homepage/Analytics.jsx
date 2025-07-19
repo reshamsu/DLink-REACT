@@ -26,13 +26,27 @@ const cardData = [
   },
 ];
 
+// For the full container
+const sectionVariant = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+// For the individual cards
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 60 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.2,
+      delay: i * 0.2 + 0.6, // starts after the container animation
       duration: 0.6,
       ease: "easeOut",
     },
@@ -41,14 +55,18 @@ const cardVariants = {
 
 const Analytics = () => {
   return (
-    <div className="text-gray-700 pt-12 px-6">
-      <div className="max-w-[1240px] mx-auto bg-gray-100 rounded-xl p-6 md:p-8">
+    <motion.div
+      className="text-white pt-12 px-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
+      variants={sectionVariant}
+    >
+      <div className="max-w-[1240px] mx-auto bg-gray-950 rounded-3xl p-8 md:p-10">
         <div className="mb-8 px-2 text-center">
           <p className="text-[#f09712] text-lg font-bold mb-2">SERVICE</p>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            What we do
-          </h1>
-          <p className="text-sm md:text-md font-semibold text-gray-400">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">What we do</h1>
+          <p className="text-md md:text-lg font-semibold text-gray-400">
             Full-Service Agents, Modern Technology
           </p>
         </div>
@@ -60,24 +78,24 @@ const Analytics = () => {
               custom={index}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.4 }}
               variants={cardVariants}
-              className="bg-white p-6 rounded-2xl flex flex-col items-center text-center shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-gray-900/20 p-8 rounded-2xl flex flex-col items-center text-center shadow-xl hover:shadow-2xl"
             >
-              <div className="w-24 h-24 mb-4 flex items-center justify-center bg-white rounded-full shadow-inner hover:scale-100 transition-transform">
+              <div className="w-24 h-24 mb-4 flex items-center justify-center bg-[#f09712] rounded-full shadow-inner hover:scale-100 transition-transform">
                 <img
                   src={card.icon}
                   alt={card.title}
                   className="w-20 h-20 rounded-full object-contain"
                 />
               </div>
-              <h2 className="text-lg font-semibold mb-2">{card.title}</h2>
+              <h2 className="text-xl font-semibold mb-4">{card.title}</h2>
               <p className="text-gray-500 text-sm">{card.content}</p>
             </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
