@@ -8,6 +8,7 @@ import Houses from "./pages/Houses";
 import Villas from "./pages/Villas";
 import Commercial from "./pages/Commercial";
 import Lands from "./pages/Lands";
+import Listings from "./pages/Listing";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +28,7 @@ function App() {
             element={<Commercial />}
           />
           <Route path="/property/lands-plots" element={<Lands />} />
+           <Route path="/property/listing" element={<Listings />} />
         </Routes>
 
         <Footer />

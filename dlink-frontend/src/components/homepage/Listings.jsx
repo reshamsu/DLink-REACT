@@ -148,7 +148,7 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <a href="/" className="text-md font-semibold">
+                <a href="/property/listing" className="text-md font-semibold">
                   {listing.title}
                 </a>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
