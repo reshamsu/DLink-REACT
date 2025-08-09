@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-700">
-      <div className="flex justify-between items-center h-22 max-w-[1240px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
+      <div className="flex justify-between items-center h-22 max-w-[1200px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
         <NavLink to="/" className="flex items-center hover:text-[#f09712]">
           <h1 className="w-fit text-2xl font-bold text-[#f09712]">
             D-LINK <span className="text-[18px]">Colombo</span>
@@ -111,9 +111,9 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/login"
-            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-xl flex items-center text-center text-white bg-[#f09712] hover:bg-[#dfa400e8]"
+            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-lg flex items-center text-center text-white bg-[#f09712] hover:bg-[#dfa400e8]"
           >
-            Sign In
+            Add Listing
           </NavLink>
         </div>
 

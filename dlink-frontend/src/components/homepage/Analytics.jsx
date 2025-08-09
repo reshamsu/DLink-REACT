@@ -62,7 +62,7 @@ const Analytics = () => {
       viewport={{ once: true, amount: 0.4 }}
       variants={sectionVariant}
     >
-      <div className="max-w-[1240px] mx-auto bg-gray-950 rounded-3xl p-8 md:p-10">
+      <div className="max-w-[1200px] mx-auto bg-gray-950 rounded-3xl p-8 md:p-10">
         <div className="mb-8 px-2 text-center">
           <p className="text-[#f09712] text-lg font-bold mb-2">SERVICE</p>
           <h1 className="text-3xl md:text-5xl font-bold mb-4">What we do</h1>

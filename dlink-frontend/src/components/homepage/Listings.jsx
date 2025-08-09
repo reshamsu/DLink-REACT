@@ -108,7 +108,7 @@ const Listings = () => {
   const rows = chunkIntoRows(listingsData, 5);
 
   return (
-    <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
+    <div className="max-w-[1200px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
       <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
         <div>
           <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
