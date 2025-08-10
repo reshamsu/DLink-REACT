@@ -149,7 +149,7 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <Link href="/property/listing" className="text-md font-semibold">
+                <Link to="/property/listing" className="text-md font-semibold">
                   {listing.title}
                 </Link>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>

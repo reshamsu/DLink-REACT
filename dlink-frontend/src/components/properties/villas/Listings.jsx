@@ -1,5 +1,6 @@
 import React from "react";
 import Property from "../../../assets/property.jpg";
+import { Link } from "react-router-dom";
 
 const listingsData = [
   {
@@ -86,7 +87,7 @@ const listingsData = [
 
 const Listings = () => {
   return (
-    <div className="max-w-[1240px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800 pt-33">
+    <div className="max-w-[1200px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800 pt-33">
       <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
         <h1 className="text-2xl font-semibold mb-4 md:mb-0">Explore Villas</h1>
         <input
@@ -110,9 +111,9 @@ const Listings = () => {
               <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
             </div>
             <div className="p-4">
-              <a href="/" className="text-md font-semibold">
+              <Link to="/property/listing" className="text-md font-semibold">
                 {listing.title}
-              </a>
+              </Link>
               <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
               <p className="text-sm text-gray-500 mb-2">{listing.type}</p>
               <span className="inline-block bg-[bisque] text-xs font-medium px-3 py-2 rounded-lg">
