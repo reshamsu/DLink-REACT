@@ -65,7 +65,7 @@ const Info = () => {
             <button>
               <a
                 href="#"
-                className="px-6 py-2.5 rounded-lg flex items-center text-center font-semibold text-white bg-[#f09712] hover:bg-[#dfa400e8]"
+                className="px-6 py-2.5 rounded-lg flex items-center text-center font-semibold text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
               >
                 Reserve for Viewings
               </a>
