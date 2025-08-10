@@ -1,6 +1,7 @@
 import React from "react";
 import Property from "../../assets/property.jpg";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const listingsData = [
   {
@@ -148,9 +149,9 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <a href="/property/listing" className="text-md font-semibold">
+                <Link href="/property/listing" className="text-md font-semibold">
                   {listing.title}
-                </a>
+                </Link>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
                 <p className="text-sm text-gray-500 mb-2">{listing.type}</p>
                 <span className="inline-block bg-[bisque] text-[11px] font-medium px-3 py-1.5 rounded-lg">
