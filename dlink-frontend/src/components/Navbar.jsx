@@ -6,6 +6,7 @@ import { MdApartment } from "react-icons/md";
 import { BsFillHousesFill } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
 import { RiLandscapeFill } from "react-icons/ri";
+import { IoIosAdd } from "react-icons/io";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -111,8 +112,9 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-lg flex items-center text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+            className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
           >
+            <IoIosAdd size={30} />
             Add Listing
           </NavLink>
         </div>
@@ -182,10 +184,11 @@ const Navbar = () => {
             </li>
             <li className="p-4">
               <NavLink
-                to="/login"
-                className="block w-full text-center px-8 mt-8 py-2.5 rounded-xl text-white bg-[#f09712] hover:bg-[#dfa400e8]"
+                to="/listing/add-listing"
+                className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
               >
-                Login
+                <IoIosAdd size={30} />
+                Add Listing
               </NavLink>
             </li>
           </ul>

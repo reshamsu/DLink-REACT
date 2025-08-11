@@ -263,7 +263,7 @@ const PropertyForm = () => {
             <div className="md:col-span-2 flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2.5 lg:ml-12 md:ml-0 rounded-lg flex items-center text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+                className="px-6 py-2.5 cursor-pointer rounded-lg flex items-center text-center font-semibold text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
               >
                 Submit Listing
               </button>
