@@ -12,7 +12,7 @@ import { BiSolidCctv } from "react-icons/bi";
 import { FaDumbbell } from "react-icons/fa";
 import { PiPottedPlantBold } from "react-icons/pi";
 import { LuDot } from "react-icons/lu";
-import { LuShare } from "react-icons/lu";
+
 
 const Info = () => {
   // Consistent responsive icon styling
@@ -37,14 +37,6 @@ const Info = () => {
               <li className="flex items-center gap-1">2 Bathrooms</li>
             </ul>
           </div>
-          <button>
-            <a
-              href=""
-              className="text-gray-700 hover:bg-gray-100 py-2 px-4 hover:text-gray-900 rounded-lg underline font-medium flex items-center gap-2"
-            >
-              <LuShare size={20} /> Share
-            </a>
-          </button>
         </div>
 
         <div className="grid grid-cols-none md:grid-cols-[1.4fr_0.8fr] gap-6 mx-6 md:mx-0">
