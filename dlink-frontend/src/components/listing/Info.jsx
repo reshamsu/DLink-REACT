@@ -42,7 +42,7 @@ const Info = () => {
               href=""
               className="text-gray-700 hover:bg-gray-100 py-2 px-4 hover:text-gray-900 rounded-lg underline font-medium flex items-center gap-2"
             >
-              <LuShare className={iconClass} /> Share
+              <LuShare size={20} /> Share
             </a>
           </button>
         </div>

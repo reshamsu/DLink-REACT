@@ -131,7 +131,7 @@ const Navbar = () => {
         <div
           className={`${
             nav
-              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white ease-in-out duration-500 z-[999]"
+              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white ease-in-out shadow-2xl duration-500 z-[999]"
               : "fixed right-[-100%] z-[999]"
           }`}
         >
