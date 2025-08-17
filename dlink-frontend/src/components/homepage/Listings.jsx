@@ -117,12 +117,12 @@ const Listings = () => {
                   {listing.title}
                 </Link>
 
-                <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
-                <p className="text-xs text-gray-700 font-semibold mb-3">
+                <p className="text-sm text-gray-500 pt-1 mb-4">{listing.location}</p>
+                <p className="text-xs text-gray-700 font-semibold mt-auto mb-3">
                   {listing.bedrooms} Bed / {listing.bathrooms} Bath
                 </p>
 
-                <div className="mt-auto flex justify-between items-end">
+                <div className="flex justify-between items-end">
                   <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
                     {listing.status}
                   </span>
