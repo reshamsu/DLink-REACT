@@ -137,7 +137,7 @@ const Hero = () => {
       {/* Lightbox only on desktop: simple vertical gallery */}
       {lightboxOpen && !isMobile && (
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-95 backdrop-blur-sm flex justify-center p-6"
+          className="fixed inset-0 z-50 overflow-y-auto bg-white bg-opacity-95 backdrop-blur-sm flex justify-center p-6"
           onClick={() => setLightboxOpen(false)}
           role="dialog"
           aria-modal="true"

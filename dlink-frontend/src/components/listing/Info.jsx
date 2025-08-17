@@ -13,11 +13,9 @@ import { FaDumbbell } from "react-icons/fa";
 import { PiPottedPlantBold } from "react-icons/pi";
 import { LuDot } from "react-icons/lu";
 
-
 const Info = () => {
   // Consistent responsive icon styling
-  const iconClass =
-    "text-3xl md:text-3xl flex-shrink-0 text-gray-700";
+  const iconClass = "text-3xl md:text-3xl flex-shrink-0 text-gray-700";
 
   return (
     <div className="max-w-[1200px] mx-auto m-4">
@@ -83,7 +81,8 @@ const Info = () => {
               <p className="text-gray-700 mt-1">per perch</p>
             </div>
             <p className="my-4 text-gray-500">
-              Discover an exceptional opportunity to own or invest in one of Colombo’s most sought-after properties.
+              Discover an exceptional opportunity to own or invest in one of
+              Colombo’s most sought-after properties.
             </p>
             <button>
               <a
@@ -103,7 +102,9 @@ const Info = () => {
             <h1 className="text-xl font-semibold">Description</h1>
             <div className="py-4 pb-8 border-b border-gray-200">
               <p className="text-gray-600 text-sm">
-                Experience modern living at its finest with this premium serviced apartment — thoughtfully designed for comfort, convenience, and style in the heart of Colombo.
+                Experience modern living at its finest with this premium
+                serviced apartment — thoughtfully designed for comfort,
+                convenience, and style in the heart of Colombo.
               </p>
             </div>
 
@@ -165,6 +166,15 @@ const Info = () => {
 
             <div className="py-8">
               <h1 className="text-xl font-medium">Locate This Property</h1>
+              {/* <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.28096487474!2d79.82563498750112!3d6.927079721596047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2597fce3e72e1%3A0x26a28452c18a2bb6!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1689301736332!5m2!1sen!2sus"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe> */}
             </div>
           </div>
         </div>

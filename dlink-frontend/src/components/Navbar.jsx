@@ -18,10 +18,22 @@ const Navbar = () => {
 
   const isPropertyPage = location.pathname.startsWith("/property");
 
+  // ✅ NEW: reload handler + close sidebar
+  const handleReload = (path) => {
+    if (location.pathname === path) {
+      window.location.reload();
+    }
+    setNav(false); // ✅ close sidebar when a link is clicked
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-700">
       <div className="flex justify-between items-center h-22 max-w-[1200px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
-        <NavLink to="/" className="flex items-center hover:text-[#f09712]">
+        <NavLink
+          to="/"
+          className="flex items-center hover:text-[#f09712]"
+          onClick={() => handleReload("/")}
+        >
           <h1 className="w-fit text-2xl font-bold text-[#f09712]">
             D-LINK <span className="text-[18px]">Colombo</span>
           </h1>
@@ -30,7 +42,7 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex hover: duration-500 transition">
           <li className="p-6">
-            <NavLink to="/" className={linkClass}>
+            <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
               Home
             </NavLink>
           </li>
@@ -51,6 +63,7 @@ const Navbar = () => {
                   <NavLink
                     to="/property/apartments"
                     className="flex items-center gap-2 hover:text-[#f09712]"
+                    onClick={() => handleReload("/property/apartments")}
                   >
                     <MdApartment size={22} />
                     <span>Apartments</span>
@@ -60,6 +73,7 @@ const Navbar = () => {
                   <NavLink
                     to="/property/houses"
                     className="flex items-center gap-2 hover:text-[#f09712]"
+                    onClick={() => handleReload("/property/houses")}
                   >
                     <BsFillHousesFill size={20} />
                     <span>Houses</span>
@@ -69,6 +83,7 @@ const Navbar = () => {
                   <NavLink
                     to="/property/villas"
                     className="flex items-center gap-2 hover:text-[#f09712]"
+                    onClick={() => handleReload("/property/villas")}
                   >
                     <PiHouseLineFill size={20} />
                     <span>Villas</span>
@@ -78,6 +93,7 @@ const Navbar = () => {
                   <NavLink
                     to="/property/commercial-properties"
                     className="flex items-center gap-2 hover:text-[#f09712]"
+                    onClick={() => handleReload("/property/commercial-properties")}
                   >
                     <FaBuilding size={20} />
                     <span>Commercial Properties</span>
@@ -87,6 +103,7 @@ const Navbar = () => {
                   <NavLink
                     to="/property/lands-plots"
                     className="flex items-center gap-2 hover:text-[#f09712]"
+                    onClick={() => handleReload("/property/lands-plots")}
                   >
                     <RiLandscapeFill size={20} />
                     <span>Lands / Plots</span>
@@ -97,12 +114,12 @@ const Navbar = () => {
           </li>
 
           <li className="p-6">
-            <NavLink to="/about" className={linkClass}>
+            <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
               About
             </NavLink>
           </li>
           <li className="p-6">
-            <NavLink to="/contact" className={linkClass}>
+            <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
               Contact
             </NavLink>
           </li>
@@ -113,6 +130,7 @@ const Navbar = () => {
           <NavLink
             to="/listing/add-listing"
             className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+            onClick={() => handleReload("/listing/add-listing")}
           >
             <IoIosAdd size={30} />
             Add Listing
@@ -140,22 +158,34 @@ const Navbar = () => {
           </h1>
           <ul className="px-4 font-medium">
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/" className={linkClass}>
+              <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
                 Home
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/property/apartments" className={linkClass}>
+              <NavLink
+                to="/property/apartments"
+                className={linkClass}
+                onClick={() => handleReload("/property/apartments")}
+              >
                 Apartments
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/property/houses" className={linkClass}>
+              <NavLink
+                to="/property/houses"
+                className={linkClass}
+                onClick={() => handleReload("/property/houses")}
+              >
                 Houses
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/property/villas" className={linkClass}>
+              <NavLink
+                to="/property/villas"
+                className={linkClass}
+                onClick={() => handleReload("/property/villas")}
+              >
                 Villas
               </NavLink>
             </li>
@@ -163,22 +193,27 @@ const Navbar = () => {
               <NavLink
                 to="/property/commercial-properties"
                 className={linkClass}
+                onClick={() => handleReload("/property/commercial-properties")}
               >
                 Commercial
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/property/lands-plots" className={linkClass}>
+              <NavLink
+                to="/property/lands-plots"
+                className={linkClass}
+                onClick={() => handleReload("/property/lands-plots")}
+              >
                 Lands / Plots
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/about" className={linkClass}>
+              <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
                 About
               </NavLink>
             </li>
             <li className="p-4">
-              <NavLink to="/contact" className={linkClass}>
+              <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
                 Contact
               </NavLink>
             </li>
@@ -186,6 +221,7 @@ const Navbar = () => {
               <NavLink
                 to="/listing/add-listing"
                 className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+                onClick={() => handleReload("/listing/add-listing")}
               >
                 <IoIosAdd size={30} />
                 Add Listing

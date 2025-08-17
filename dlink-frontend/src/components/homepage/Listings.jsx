@@ -108,6 +108,11 @@ const rowVariants = {
 const Listings = () => {
   const rows = chunkIntoRows(listingsData, 5);
 
+  // 🆕 Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
       <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
@@ -149,7 +154,12 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                <Link to="/property/listing" className="text-md font-semibold">
+                {/* 🆕 Added onClick to scroll to top */}
+                <Link
+                  to="/property/listing"
+                  onClick={scrollToTop}
+                  className="text-md font-semibold"
+                >
                   {listing.title}
                 </Link>
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
