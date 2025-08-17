@@ -43,7 +43,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className="max-w-[1200px] mx-auto mt-22 flex md:flex flex-col-reverse md:flex-col">
+      <div className="max-w-[1200px] mx-auto mt-22 xl:px-0 md:px-6 flex md:flex flex-col-reverse md:flex-col">
         {/* Header */}
         <div className="pt-4 md:pt-10 mb-6 mx-5 md:mx-0 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div className="flex-1">

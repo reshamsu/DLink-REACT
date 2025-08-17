@@ -1,30 +1,30 @@
+import supabase from "../config/supabaseClient";
 import React, { useState } from "react";
-// import { supabase } from "../../config/supabaseClient";
 
 const PropertyForm = () => {
-  const [formData, setFormData] = useState({
+  const [Listing, setListing] = useState([]);
+  const [newListing, setNewListing] = useState({
     property_title: "",
     property_type: "",
-    listing_type: "", // ✅ rent or sale
+    listing_type: "",
     city: "",
     location: "",
     owner: "",
     description: "",
-    bedrooms: "",
-    bathrooms: "",
-    perches: "",
-    per_perch: "",
-    sqft: "",
-    floors: "",
-    building_age: "",
+    bedrooms: 0,
+    bathrooms: 0,
+    perches: 0,
+    per_perch: 0,
+    sqft: 0,
+    floors: 0,
+    building_age: 0,
     maintain_fee: "",
-    price: "",
-    amenities: [], // ✅ updated with more
+    price: 0,
+    amenities: [],
     remarks: "",
-    status: false,
+    status: "Available", // default value
   });
 
-  // ✅ Updated features list based on your screenshot
   const featuresList = [
     "24/7 Lift Access",
     "Swimming Pool",
@@ -39,20 +39,20 @@ const PropertyForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox" && name === "amenities") {
-      setFormData((prev) => ({
+    if (type === "checkbox") {
+      setNewListing((prev) => ({
         ...prev,
         amenities: checked
           ? [...prev.amenities, value]
           : prev.amenities.filter((f) => f !== value),
       }));
-    } else if (type === "checkbox") {
-      setFormData((prev) => ({
+    } else if (type === "number") {
+      setNewListing((prev) => ({
         ...prev,
-        [name]: checked,
+        [name]: Number(value),
       }));
     } else {
-      setFormData((prev) => ({
+      setNewListing((prev) => ({
         ...prev,
         [name]: value,
       }));
@@ -62,14 +62,39 @@ const PropertyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await supabase.from("Listings").insert([formData]);
+    const { data, error } = await supabase
+      .from("listings")
+      .insert([newListing])
+      .select()
+      .single();
 
     if (error) {
-      console.error("Error inserting listing:", error);
-      alert("Failed to submit listing.");
+      console.log("Error adding listing: ", error);
     } else {
-      console.log("Inserted listing:", data);
-      alert("Listing submitted successfully!");
+      setListing((prev) => [...prev, data]);
+
+      // Reset form
+      setNewListing({
+        property_title: "",
+        property_type: "",
+        listing_type: "",
+        city: "",
+        location: "",
+        owner: "",
+        description: "",
+        bedrooms: 0,
+        bathrooms: 0,
+        perches: 0,
+        per_perch: 0,
+        sqft: 0,
+        floors: 0,
+        building_age: 0,
+        maintain_fee: "",
+        price: 0,
+        amenities: [],
+        remarks: "",
+        status: "Available",
+      });
     }
   };
 
@@ -88,13 +113,13 @@ const PropertyForm = () => {
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
           >
-            {/* Title */}
+            {/* Property Title */}
             <div className="flex flex-col gap-2">
               <label>Property Title</label>
               <input
                 type="text"
                 name="property_title"
-                value={formData.property_title}
+                value={newListing.property_title}
                 onChange={handleChange}
                 placeholder="Property Title"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -107,7 +132,7 @@ const PropertyForm = () => {
               <label>Property Type</label>
               <select
                 name="property_type"
-                value={formData.property_type}
+                value={newListing.property_type}
                 onChange={handleChange}
                 className="py-2 px-4 border border-gray-100 rounded-lg"
                 required
@@ -124,13 +149,13 @@ const PropertyForm = () => {
 
             {/* City */}
             <div className="flex flex-col gap-2">
-              <label>City</label>
+              <label>Town / City</label>
               <input
                 type="text"
                 name="city"
-                value={formData.city}
+                value={newListing.city}
                 onChange={handleChange}
-                placeholder="City"
+                placeholder="Town/City"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
                 required
               />
@@ -139,42 +164,60 @@ const PropertyForm = () => {
             {/* Location */}
             <div className="flex flex-col gap-2">
               <label>Location / Place</label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder="Location"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
-                required
-              />
-            </div>
-
-            {/* Listing Type (Rent or Sale) */}
-            <div className="flex flex-col gap-2">
-              <label>Listing Type</label>
               <select
-                name="listing_type"
-                value={formData.listing_type}
+                name="location"
+                value={newListing.location}
                 onChange={handleChange}
                 className="py-2 px-4 border border-gray-100 rounded-lg"
                 required
               >
                 <option value="">Select</option>
-                <option value="rent">Rent</option>
-                <option value="sale">Sale</option>
+                <option value="Land Side">Land Side</option>
+                <option value="Sea Side">Sea Side</option>
+              </select>
+            </div>
+
+            {/* Listing Type */}
+            <div className="flex flex-col gap-2">
+              <label>Listing Type</label>
+              <select
+                name="listing_type"
+                value={newListing.listing_type}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Rent">Rent</option>
+                <option value="Sale">Sale</option>
+              </select>
+            </div>
+
+            {/* Property Status */}
+            <div className="flex flex-col gap-2">
+              <label>Status</label>
+              <select
+                name="status"
+                value={newListing.status}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+                required
+              >
+                <option value="Available">Available</option>
+                <option value="Sold">Sold</option>
+                <option value="Pending">Pending</option>
               </select>
             </div>
 
             {/* Owner */}
             <div className="flex flex-col gap-2">
-              <label>Owner</label>
+              <label>Property Owner</label>
               <input
                 type="text"
                 name="owner"
-                value={formData.owner}
+                value={newListing.owner}
                 onChange={handleChange}
-                placeholder="Owner"
+                placeholder="Owner Name"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
@@ -185,7 +228,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="bedrooms"
-                value={formData.bedrooms}
+                value={newListing.bedrooms}
                 onChange={handleChange}
                 placeholder="Bedrooms"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -198,7 +241,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="bathrooms"
-                value={formData.bathrooms}
+                value={newListing.bathrooms}
                 onChange={handleChange}
                 placeholder="Bathrooms"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -211,7 +254,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="perches"
-                value={formData.perches}
+                value={newListing.perches}
                 onChange={handleChange}
                 placeholder="Perches"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -224,7 +267,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="sqft"
-                value={formData.sqft}
+                value={newListing.sqft}
                 onChange={handleChange}
                 placeholder="Sq Ft"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -237,7 +280,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="floors"
-                value={formData.floors}
+                value={newListing.floors}
                 onChange={handleChange}
                 placeholder="Floors"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -250,20 +293,20 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="building_age"
-                value={formData.building_age}
+                value={newListing.building_age}
                 onChange={handleChange}
                 placeholder="Years"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
 
-            {/* Maintain Fee */}
+            {/* Maintenance Fee */}
             <div className="flex flex-col gap-2">
-              <label>Maintain Fee</label>
+              <label>Maintenance Fee</label>
               <input
                 type="text"
                 name="maintain_fee"
-                value={formData.maintain_fee}
+                value={newListing.maintain_fee}
                 onChange={handleChange}
                 placeholder="Maintenance Fee"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -276,7 +319,7 @@ const PropertyForm = () => {
               <input
                 type="number"
                 name="price"
-                value={formData.price}
+                value={newListing.price}
                 onChange={handleChange}
                 placeholder="Price"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -293,7 +336,7 @@ const PropertyForm = () => {
                       type="checkbox"
                       name="amenities"
                       value={feature}
-                      checked={formData.amenities.includes(feature)}
+                      checked={newListing.amenities.includes(feature)}
                       onChange={handleChange}
                     />
                     {feature}
@@ -307,7 +350,7 @@ const PropertyForm = () => {
               <label>Description</label>
               <textarea
                 name="description"
-                value={formData.description}
+                value={newListing.description}
                 onChange={handleChange}
                 placeholder="Property description"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
@@ -319,14 +362,14 @@ const PropertyForm = () => {
               <label>Remarks</label>
               <textarea
                 name="remarks"
-                value={formData.remarks}
+                value={newListing.remarks}
                 onChange={handleChange}
                 placeholder="Any additional notes..."
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <div className="md:col-span-2 flex justify-end">
               <button
                 type="submit"

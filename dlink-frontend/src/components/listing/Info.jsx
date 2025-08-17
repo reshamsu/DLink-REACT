@@ -1,7 +1,6 @@
 import React from "react";
 import { TbSmartHome } from "react-icons/tb";
 import { FaMapLocationDot } from "react-icons/fa6";
-import { VscVerifiedFilled } from "react-icons/vsc";
 import { LuCalendarFold } from "react-icons/lu";
 import { PiElevatorDuotone } from "react-icons/pi";
 import { MdPool } from "react-icons/md";
@@ -18,7 +17,7 @@ const Info = () => {
   const iconClass = "text-3xl md:text-3xl flex-shrink-0 text-gray-700";
 
   return (
-    <div className="max-w-[1200px] mx-auto m-4">
+    <div className="max-w-[1200px] mx-auto m-4 xl:px-0 md:px-6">
       <div>
         <div className="flex items-center justify-between">
           <div className="pt-4 mb-8 hidden md:block">
