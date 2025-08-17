@@ -37,7 +37,6 @@ const Listings = () => {
       console.error("Error fetching listings:", error);
       setListingsData([]);
     } else {
-      // If you have images stored as URLs, replace fallback Property image
       const formattedData = data.map((listing) => ({
         id: listing.id,
         title: listing.property_title,
@@ -46,7 +45,7 @@ const Listings = () => {
         bathrooms: listing.bathrooms,
         type: listing.property_type,
         status: listing.status,
-        image: listing.image_url || Property, // fallback to default image
+        image: listing.image_url || Property, // fallback image
       }));
       setListingsData(formattedData);
     }
@@ -93,12 +92,12 @@ const Listings = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={rowVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-6 items-stretch"
         >
           {row.map((listing) => (
             <div
               key={listing.id}
-              className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl"
+              className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl flex flex-col h-full"
             >
               <div className="relative h-44 overflow-hidden">
                 <img
@@ -108,7 +107,8 @@ const Listings = () => {
                 />
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
-              <div className="p-4">
+
+              <div className="flex flex-col flex-1 p-4">
                 <Link
                   to="/property/listing"
                   onClick={scrollToTop}
@@ -118,11 +118,11 @@ const Listings = () => {
                 </Link>
 
                 <p className="text-sm text-gray-500 mb-4">{listing.location}</p>
-                <p className="text-xs text-gray-400 mb-3">
-                  {listing.bedrooms} Bed / {listing.bathrooms} Baths
+                <p className="text-xs text-gray-700 font-semibold mb-3">
+                  {listing.bedrooms} Bed / {listing.bathrooms} Bath
                 </p>
 
-                <div className="flex items-end-safe justify-between">
+                <div className="mt-auto flex justify-between items-end">
                   <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
                     {listing.status}
                   </span>
