@@ -2,6 +2,7 @@ import React from "react";
 import Property from "../../assets/property.jpg";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import supabase from "../../config/supabaseClient"
 
 const listingsData = [
   {
@@ -86,7 +87,6 @@ const listingsData = [
   },
 ];
 
-// Split listings into rows (5 cards per row for xl:grid-cols-5)
 const chunkIntoRows = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
     arr.slice(i * size, i * size + size)
@@ -108,7 +108,6 @@ const rowVariants = {
 const Listings = () => {
   const rows = chunkIntoRows(listingsData, 5);
 
-  // 🆕 Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -133,7 +132,7 @@ const Listings = () => {
       {rows.map((row, rowIndex) => (
         <motion.div
           key={rowIndex}
-          custom={rows.length - rowIndex - 1} // reverse order for bottom-to-top
+          custom={rows.length - rowIndex - 1} 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -154,7 +153,6 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
               <div className="p-4">
-                {/* 🆕 Added onClick to scroll to top */}
                 <Link
                   to="/property/listing"
                   onClick={scrollToTop}

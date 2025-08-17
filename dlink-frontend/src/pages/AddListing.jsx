@@ -1,34 +1,55 @@
 import React, { useState } from "react";
+// import { supabase } from "../../config/supabaseClient";
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
-    propertyType: "",
+    property_title: "",
+    property_type: "",
+    listing_type: "", // ✅ rent or sale
     city: "",
     location: "",
+    owner: "",
+    description: "",
     bedrooms: "",
+    bathrooms: "",
     perches: "",
+    per_perch: "",
     sqft: "",
-    floor: "",
-    ageOfBuilding: "",
-    servantRoom: "",
-    servantBathrooms: "",
-    marketValue: "",
+    floors: "",
+    building_age: "",
+    maintain_fee: "",
     price: "",
-    features: [],
+    amenities: [], // ✅ updated with more
     remarks: "",
+    status: false,
   });
 
-  const featuresList = ["Swimming pool", "Gym"];
+  // ✅ Updated features list based on your screenshot
+  const featuresList = [
+    "24/7 Lift Access",
+    "Swimming Pool",
+    "Secure Parking",
+    "Air Conditioning",
+    "High-Speed Internet",
+    "Security System",
+    "Gym & Fitness Center",
+    "Garden & Green Spaces",
+  ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox") {
+    if (type === "checkbox" && name === "amenities") {
       setFormData((prev) => ({
         ...prev,
-        features: checked
-          ? [...prev.features, value]
-          : prev.features.filter((f) => f !== value),
+        amenities: checked
+          ? [...prev.amenities, value]
+          : prev.amenities.filter((f) => f !== value),
+      }));
+    } else if (type === "checkbox") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: checked,
       }));
     } else {
       setFormData((prev) => ({
@@ -38,10 +59,18 @@ const PropertyForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    alert("Form submitted! Check console for details.");
+
+    const { data, error } = await supabase.from("Listings").insert([formData]);
+
+    if (error) {
+      console.error("Error inserting listing:", error);
+      alert("Failed to submit listing.");
+    } else {
+      console.log("Inserted listing:", data);
+      alert("Listing submitted successfully!");
+    }
   };
 
   return (
@@ -59,12 +88,26 @@ const PropertyForm = () => {
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
           >
+            {/* Title */}
+            <div className="flex flex-col gap-2">
+              <label>Property Title</label>
+              <input
+                type="text"
+                name="property_title"
+                value={formData.property_title}
+                onChange={handleChange}
+                placeholder="Property Title"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+                required
+              />
+            </div>
+
             {/* Property Type */}
             <div className="flex flex-col gap-2">
               <label>Property Type</label>
               <select
-                name="propertyType"
-                value={formData.propertyType}
+                name="property_type"
+                value={formData.property_type}
                 onChange={handleChange}
                 className="py-2 px-4 border border-gray-100 rounded-lg"
                 required
@@ -107,6 +150,35 @@ const PropertyForm = () => {
               />
             </div>
 
+            {/* Listing Type (Rent or Sale) */}
+            <div className="flex flex-col gap-2">
+              <label>Listing Type</label>
+              <select
+                name="listing_type"
+                value={formData.listing_type}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+                required
+              >
+                <option value="">Select</option>
+                <option value="rent">Rent</option>
+                <option value="sale">Sale</option>
+              </select>
+            </div>
+
+            {/* Owner */}
+            <div className="flex flex-col gap-2">
+              <label>Owner</label>
+              <input
+                type="text"
+                name="owner"
+                value={formData.owner}
+                onChange={handleChange}
+                placeholder="Owner"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
+            </div>
+
             {/* Bedrooms */}
             <div className="flex flex-col gap-2">
               <label>Bedrooms</label>
@@ -115,103 +187,85 @@ const PropertyForm = () => {
                 name="bedrooms"
                 value={formData.bedrooms}
                 onChange={handleChange}
-                placeholder="Number of bedrooms"
+                placeholder="Bedrooms"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
 
-            {/* Conditional: Perches (House) */}
-            {formData.propertyType === "House" && (
-              <div className="flex flex-col gap-2">
-                <label>Perches</label>
-                <input
-                  type="number"
-                  name="perches"
-                  value={formData.perches}
-                  onChange={handleChange}
-                  placeholder="Perches"
-                  className="py-2 px-4 border border-gray-100 rounded-lg"
-                />
-              </div>
-            )}
-
-            {/* Conditional: Sqft + Floor (Apartment) */}
-            {formData.propertyType === "Apartment" && (
-              <>
-                <div className="flex flex-col gap-2">
-                  <label>Sq ft</label>
-                  <input
-                    type="number"
-                    name="sqft"
-                    value={formData.sqft}
-                    onChange={handleChange}
-                    placeholder="Sq ft"
-                    className="py-2 px-4 border border-gray-100 rounded-lg"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label>Floor</label>
-                  <input
-                    type="number"
-                    name="floor"
-                    value={formData.floor}
-                    onChange={handleChange}
-                    placeholder="Floor"
-                    className="py-2 px-4 border border-gray-100 rounded-lg"
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Age of Building */}
+            {/* Bathrooms */}
             <div className="flex flex-col gap-2">
-              <label>Age of Building</label>
+              <label>Bathrooms</label>
               <input
                 type="number"
-                name="ageOfBuilding"
-                value={formData.ageOfBuilding}
+                name="bathrooms"
+                value={formData.bathrooms}
+                onChange={handleChange}
+                placeholder="Bathrooms"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
+            </div>
+
+            {/* Perches */}
+            <div className="flex flex-col gap-2">
+              <label>Perches</label>
+              <input
+                type="number"
+                name="perches"
+                value={formData.perches}
+                onChange={handleChange}
+                placeholder="Perches"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
+            </div>
+
+            {/* Sq Ft */}
+            <div className="flex flex-col gap-2">
+              <label>Sq Ft</label>
+              <input
+                type="number"
+                name="sqft"
+                value={formData.sqft}
+                onChange={handleChange}
+                placeholder="Sq Ft"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
+            </div>
+
+            {/* Floors */}
+            <div className="flex flex-col gap-2">
+              <label>Floors</label>
+              <input
+                type="number"
+                name="floors"
+                value={formData.floors}
+                onChange={handleChange}
+                placeholder="Floors"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
+            </div>
+
+            {/* Building Age */}
+            <div className="flex flex-col gap-2">
+              <label>Building Age</label>
+              <input
+                type="number"
+                name="building_age"
+                value={formData.building_age}
                 onChange={handleChange}
                 placeholder="Years"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
 
-            {/* Servant Room */}
+            {/* Maintain Fee */}
             <div className="flex flex-col gap-2">
-              <label>Servant Room</label>
+              <label>Maintain Fee</label>
               <input
-                type="number"
-                name="servantRoom"
-                value={formData.servantRoom}
+                type="text"
+                name="maintain_fee"
+                value={formData.maintain_fee}
                 onChange={handleChange}
-                placeholder="Number of rooms"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
-              />
-            </div>
-
-            {/* Servant Bathrooms */}
-            <div className="flex flex-col gap-2">
-              <label>Servant Bathrooms</label>
-              <input
-                type="number"
-                name="servantBathrooms"
-                value={formData.servantBathrooms}
-                onChange={handleChange}
-                placeholder="Number of bathrooms"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
-              />
-            </div>
-
-            {/* Market Value */}
-            <div className="flex flex-col gap-2">
-              <label>Market Value</label>
-              <input
-                type="number"
-                name="marketValue"
-                value={formData.marketValue}
-                onChange={handleChange}
-                placeholder="Market value"
+                placeholder="Maintenance Fee"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
@@ -224,27 +278,40 @@ const PropertyForm = () => {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                placeholder="Selling price"
+                placeholder="Price"
                 className="py-2 px-4 border border-gray-100 rounded-lg"
               />
             </div>
 
-            {/* Features */}
+            {/* Amenities */}
             <div className="flex flex-col md:col-span-2 gap-2">
-              <label>Additional Features</label>
-              <div className="flex gap-4">
+              <label>Amenities</label>
+              <div className="grid grid-cols-2 gap-4">
                 {featuresList.map((feature) => (
                   <label key={feature} className="flex items-center gap-2">
                     <input
                       type="checkbox"
+                      name="amenities"
                       value={feature}
-                      checked={formData.features.includes(feature)}
+                      checked={formData.amenities.includes(feature)}
                       onChange={handleChange}
                     />
                     {feature}
                   </label>
                 ))}
               </div>
+            </div>
+
+            {/* Description */}
+            <div className="flex flex-col md:col-span-2 gap-2">
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Property description"
+                className="py-2 px-4 border border-gray-100 rounded-lg"
+              />
             </div>
 
             {/* Remarks */}
