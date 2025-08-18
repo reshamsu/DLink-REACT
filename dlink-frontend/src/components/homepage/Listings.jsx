@@ -41,6 +41,7 @@ const Listings = () => {
         id: listing.id,
         title: listing.property_title,
         location: listing.city + " - " + listing.location,
+        is_furnished: listing.is_furnished,
         bedrooms: listing.bedrooms,
         bathrooms: listing.bathrooms,
         type: listing.property_type,
@@ -56,7 +57,7 @@ const Listings = () => {
     fetchListings();
   }, []);
 
-  const rows = chunkIntoRows(listingsData, 5);
+  const rows = chunkIntoRows(listingsData, 8);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -99,7 +100,7 @@ const Listings = () => {
               key={listing.id}
               className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl flex flex-col h-full"
             >
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative h-48 overflow-hidden">
                 <img
                   src={listing.image}
                   alt={listing.title}
@@ -116,11 +117,18 @@ const Listings = () => {
                 >
                   {listing.title}
                 </Link>
-
-                <p className="text-sm text-gray-500 pt-1 mb-4">{listing.location}</p>
-                <p className="text-xs text-gray-700 font-semibold mt-auto mb-3">
-                  {listing.bedrooms} Bed / {listing.bathrooms} Bath
+                <p className="text-sm text-gray-500 pt-1 mb-3">
+                  {listing.location}
                 </p>
+
+                <div className="mt-auto">
+                  <label className="text-sm font-semibold text-gray-700">
+                    {listing.is_furnished}
+                  </label>
+                  <p className="text-xs text-gray-700 font-semibold my-3">
+                    {listing.bedrooms} Bed / {listing.bathrooms} Bath
+                  </p>
+                </div>
 
                 <div className="flex justify-between items-end">
                   <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
