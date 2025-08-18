@@ -7,7 +7,7 @@ import { BsFillHousesFill } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
 import { RiLandscapeFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
-import logo from "../assets/dlink.jpeg";
+import logo from "../assets/dlink.png";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -38,10 +38,10 @@ const Navbar = () => {
           <div className="flex items-center text-gray-800">
             <img src={logo} alt="" className="w-14 h-14 mr-3" />
             <div className="flex flex-col">
-              <h1 className="w-fit flex items-center text-xl font-bold ">
+              <h1 className="w-fit flex items-center text-lg font-bold ">
                 D-LINK
               </h1>
-              <span className="text-sm font-medium">Colombo</span>
+              <span className="text-xs font-medium">Colombo</span>
             </div>
           </div>
         </NavLink>
@@ -88,16 +88,6 @@ const Navbar = () => {
                   >
                     <BsFillHousesFill size={20} />
                     <span>Houses</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/property/villas"
-                    className="flex items-center gap-2 hover:text-[#f09712]"
-                    onClick={() => handleReload("/property/villas")}
-                  >
-                    <PiHouseLineFill size={20} />
-                    <span>Villas</span>
                   </NavLink>
                 </li>
                 <li>
@@ -177,10 +167,10 @@ const Navbar = () => {
           <div className="flex items-center text-gray-800 py-7 px-7">
             <img src={logo} alt="" className="w-14 h-14 mr-3" />
             <div className="flex flex-col">
-              <h1 className="w-fit flex items-center text-xl font-bold ">
+              <h1 className="w-fit flex items-center text-lg font-bold ">
                 D-LINK
               </h1>
-              <span className="text-sm font-medium">Colombo</span>
+              <span className="text-xs font-medium">Colombo</span>
             </div>
           </div>
 
@@ -210,15 +200,6 @@ const Navbar = () => {
                 onClick={() => handleReload("/property/houses")}
               >
                 Houses
-              </NavLink>
-            </li>
-            <li className="p-4 border-b border-gray-100">
-              <NavLink
-                to="/property/villas"
-                className={linkClass}
-                onClick={() => handleReload("/property/villas")}
-              >
-                Villas
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
