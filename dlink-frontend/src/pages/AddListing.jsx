@@ -66,18 +66,23 @@ const PropertyForm = () => {
       if (!files || files.length === 0) return;
 
       const uploadedUrls = [];
+
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const fileName = `${Date.now()}_${file.name}`;
+        const filePath = `images/${Date.now()}_${file.name}`;
+
         const { data, error } = await supabase.storage
           .from("listings")
-          .upload(fileName, file);
+          .upload(filePath, file);
 
-        if (error) throw error;
+        if (error) {
+          console.error("Upload error:", error);
+          continue;
+        }
 
         const { data: publicUrlData } = supabase.storage
           .from("listings")
-          .getPublicUrl(fileName);
+          .getPublicUrl(filePath);
 
         uploadedUrls.push(publicUrlData.publicUrl);
       }
@@ -105,9 +110,6 @@ const PropertyForm = () => {
       per_perch: newListing.per_perch ? Number(newListing.per_perch) : null,
       sqft: newListing.sqft ? Number(newListing.sqft) : null,
       floors: newListing.floors ? Number(newListing.floors) : null,
-      building_age: newListing.building_age
-        ? Number(newListing.building_age)
-        : null,
       price: newListing.price ? Number(newListing.price) : null,
     };
 
@@ -165,7 +167,9 @@ const PropertyForm = () => {
           >
             {/* Property Title */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Property Title</label>
+              <label className="font-semibold text-gray-700">
+                Property Title
+              </label>
               <input
                 type="text"
                 name="property_title"
@@ -179,7 +183,9 @@ const PropertyForm = () => {
 
             {/* Property Type */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Property Type</label>
+              <label className="font-semibold text-gray-700">
+                Property Type
+              </label>
               <select
                 name="property_type"
                 value={newListing.property_type}
@@ -213,7 +219,9 @@ const PropertyForm = () => {
 
             {/* Location */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Location / Place</label>
+              <label className="font-semibold text-gray-700">
+                Location / Place
+              </label>
               <select
                 name="location"
                 value={newListing.location}
@@ -229,7 +237,9 @@ const PropertyForm = () => {
 
             {/* Listing Type */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Listing Type</label>
+              <label className="font-semibold text-gray-700">
+                Listing Type
+              </label>
               <select
                 name="listing_type"
                 value={newListing.listing_type}
@@ -277,7 +287,9 @@ const PropertyForm = () => {
 
             {/* Owner */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Property Owner</label>
+              <label className="font-semibold text-gray-700">
+                Property Owner
+              </label>
               <input
                 type="text"
                 name="owner"
@@ -355,7 +367,9 @@ const PropertyForm = () => {
 
             {/* Building Age */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Building Age</label>
+              <label className="font-semibold text-gray-700">
+                Building Age
+              </label>
               <input
                 type="text"
                 name="building_age"
@@ -368,7 +382,9 @@ const PropertyForm = () => {
 
             {/* Maintenance Fee */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Maintenance Fee</label>
+              <label className="font-semibold text-gray-700">
+                Maintenance Fee
+              </label>
               <input
                 type="text"
                 name="maintain_fee"
@@ -437,7 +453,9 @@ const PropertyForm = () => {
 
             {/* Image Upload */}
             <div className="flex flex-col md:col-span-2 gap-2">
-              <label className="font-semibold text-gray-700">Upload Images</label>
+              <label className="font-semibold text-gray-700">
+                Upload Images
+              </label>
               <input
                 type="file"
                 multiple

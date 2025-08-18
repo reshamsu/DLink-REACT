@@ -7,6 +7,7 @@ import { BsFillHousesFill } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
 import { RiLandscapeFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
+import logo from "../assets/dlink.jpeg";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -34,15 +35,25 @@ const Navbar = () => {
           className="flex items-center hover:text-[#f09712]"
           onClick={() => handleReload("/")}
         >
-          <h1 className="w-fit text-2xl font-bold text-[#f09712]">
-            D-LINK <span className="text-[18px]">Colombo</span>
-          </h1>
+          <div className="flex items-center text-gray-800">
+            <img src={logo} alt="" className="w-14 h-14 mr-3" />
+            <div className="flex flex-col">
+              <h1 className="w-fit flex items-center text-xl font-bold ">
+                D-LINK
+              </h1>
+              <span className="text-sm font-medium">Colombo</span>
+            </div>
+          </div>
         </NavLink>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex hover: duration-500 transition">
           <li className="p-6">
-            <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
+            <NavLink
+              to="/"
+              className={linkClass}
+              onClick={() => handleReload("/")}
+            >
               Home
             </NavLink>
           </li>
@@ -93,7 +104,9 @@ const Navbar = () => {
                   <NavLink
                     to="/property/commercial-properties"
                     className="flex items-center gap-2 hover:text-[#f09712]"
-                    onClick={() => handleReload("/property/commercial-properties")}
+                    onClick={() =>
+                      handleReload("/property/commercial-properties")
+                    }
                   >
                     <FaBuilding size={20} />
                     <span>Commercial Properties</span>
@@ -114,12 +127,20 @@ const Navbar = () => {
           </li>
 
           <li className="p-6">
-            <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
+            <NavLink
+              to="/about"
+              className={linkClass}
+              onClick={() => handleReload("/about")}
+            >
               About
             </NavLink>
           </li>
           <li className="p-6">
-            <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
+            <NavLink
+              to="/contact"
+              className={linkClass}
+              onClick={() => handleReload("/contact")}
+            >
               Contact
             </NavLink>
           </li>
@@ -153,12 +174,23 @@ const Navbar = () => {
               : "fixed right-[-100%] z-[999]"
           }`}
         >
-          <h1 className="w-full text-2xl font-bold text-[#f09712] px-8 py-8">
-            D-Link <span className="text-[18px]">Colombo</span>
-          </h1>
+          <div className="flex items-center text-gray-800 py-7 px-7">
+            <img src={logo} alt="" className="w-14 h-14 mr-3" />
+            <div className="flex flex-col">
+              <h1 className="w-fit flex items-center text-xl font-bold ">
+                D-LINK
+              </h1>
+              <span className="text-sm font-medium">Colombo</span>
+            </div>
+          </div>
+
           <ul className="px-4 font-medium">
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
+              <NavLink
+                to="/"
+                className={linkClass}
+                onClick={() => handleReload("/")}
+              >
                 Home
               </NavLink>
             </li>
@@ -208,12 +240,20 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="p-4 border-b border-gray-100">
-              <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
+              <NavLink
+                to="/about"
+                className={linkClass}
+                onClick={() => handleReload("/about")}
+              >
                 About
               </NavLink>
             </li>
             <li className="p-4">
-              <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
+              <NavLink
+                to="/contact"
+                className={linkClass}
+                onClick={() => handleReload("/contact")}
+              >
                 Contact
               </NavLink>
             </li>
