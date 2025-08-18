@@ -6,7 +6,7 @@ import {
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
-import logo from "../assets/dlink.png";
+import logo from "/dlink.png";
 
 const Footer = () => {
   return (
