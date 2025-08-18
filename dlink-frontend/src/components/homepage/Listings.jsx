@@ -117,15 +117,15 @@ const Listings = () => {
                 >
                   {listing.title}
                 </Link>
-                <p className="text-sm text-gray-500 pt-1 mb-3">
+                <p className="text-sm text-gray-500 mb-2">
                   {listing.location}
                 </p>
 
                 <div className="mt-auto">
-                  <label className="text-sm font-semibold text-gray-700">
+                  <i className="text-xs font-semibold text-gray-800">
                     {listing.is_furnished}
-                  </label>
-                  <p className="text-xs text-gray-700 font-semibold my-3">
+                  </i>
+                  <p className="text-xs font-semibold text-gray-700 pt-1 mb-3">
                     {listing.bedrooms} Bed / {listing.bathrooms} Bath
                   </p>
                 </div>
