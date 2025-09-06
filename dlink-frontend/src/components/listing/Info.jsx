@@ -1,185 +1,227 @@
-import React from "react";
-import { TbSmartHome } from "react-icons/tb";
-import { FaMapLocationDot } from "react-icons/fa6";
-import { LuCalendarFold } from "react-icons/lu";
-import { PiElevatorDuotone } from "react-icons/pi";
-import { MdPool } from "react-icons/md";
-import { TbParkingCircle } from "react-icons/tb";
-import { FaRegSnowflake } from "react-icons/fa";
-import { FaWifi } from "react-icons/fa";
-import { BiSolidCctv } from "react-icons/bi";
-import { FaDumbbell } from "react-icons/fa";
-import { PiPottedPlantBold } from "react-icons/pi";
-import { LuDot } from "react-icons/lu";
+import React, { useState, useEffect } from "react";
+import { LuShare } from "react-icons/lu";
+import { RiGalleryView2 } from "react-icons/ri";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import supabase from "../../config/supabaseClient";
+import { useParams } from "react-router-dom";
+import Property from "../../assets/property.jpg"; // fallback image
 
-const Info = () => {
-  // Consistent responsive icon styling
-  const iconClass = "text-3xl md:text-3xl flex-shrink-0 text-gray-700";
+const Hero = () => {
+  const { id } = useParams(); // fetch property by ID
+  const [listing, setListing] = useState(null);
+  const [images, setImages] = useState([Property]);
+  const [mainImage, setMainImage] = useState(Property);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const MAX_VISIBLE = 5;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Fetch listing images from Supabase
+  const fetchListing = async () => {
+    if (!id) return;
+
+    const { data, error } = await supabase
+      .from("listings")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching listing:", error);
+      setListing(null);
+      setImages([Property]);
+      setMainImage(Property);
+    } else if (data) {
+      const imgs =
+        data.image_urls && data.image_urls.length > 0 ? data.image_urls : [Property];
+      setListing({
+        title: data.property_title || "Property Title",
+        date: data.updated_at
+          ? new Date(data.updated_at).toLocaleDateString()
+          : "N/A",
+      });
+      setImages(imgs);
+      setMainImage(imgs[0]);
+    }
+  };
+
+  useEffect(() => {
+    fetchListing();
+
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [id]);
+
+  const mobileSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
+  if (!listing) return <p className="text-center mt-10 text-gray-500">Loading...</p>;
 
   return (
-    <div className="max-w-[1200px] mx-auto m-4 xl:px-0 md:px-6">
-      <div>
-        <div className="flex items-center justify-between">
-          <div className="pt-4 mb-8 hidden md:block">
-            <h1 className="text-gray-700 text-xl font-medium">
+    <>
+      <div className="max-w-[1200px] mx-auto mt-22 xl:px-0 md:px-6 flex md:flex flex-col-reverse md:flex-col">
+        {/* Header */}
+        <div className="pt-4 md:pt-10 mb-6 mx-5 md:mx-0 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div className="flex-1">
+            <h1 className="text-lg md:text-2xl font-semibold">{listing.title}</h1>
+            <h2 className="block md:hidden pt-2 mb-1 text-gray-800 font-medium text-sm">
               Entire Serviced Apartment in Colombo, Sri Lanka
-            </h1>
-            <ul className="flex grid-cols-3 py-1 gap-1 text-gray-600">
-              <li className="flex items-center gap-1">
-                2 Guests <LuDot />
-              </li>
-              <li className="flex items-center gap-1">
-                2 Bedrooms <LuDot />
-              </li>
-              <li className="flex items-center gap-1">2 Bathrooms</li>
-            </ul>
+            </h2>
+            <p className="py-1 text-xs md:text-sm font-normal text-gray-400">
+              Updated: {listing.date}
+            </p>
           </div>
+
+          {/* Share Button */}
+          <button className="self-start md:self-center">
+            <a
+              href="#"
+              className="text-gray-700 bg-gray-100 hover:bg-gray-200 py-2 px-3 hover:text-gray-800 border border-gray-400 hover:border-gray-600 rounded-xl font-medium flex items-center gap-2 text-sm md:text-base"
+            >
+              <LuShare size={18} />
+              <span>Share</span>
+            </a>
+          </button>
         </div>
 
-        <div className="grid grid-cols-none md:grid-cols-[1.4fr_0.8fr] gap-6 mx-6 md:mx-0">
-          {/* Left Column - Property Info */}
-          <div className="flex flex-col h-fit">
-            <div className="pb-4 border-b border-gray-200">
-              <h1 className="text-lg font-medium">Property Owner</h1>
-              <p className="text-gray-400 text-sm mt-1">D-Link Colombo</p>
-            </div>
-
-            <div className="py-2 border-b border-gray-200 text-gray-800">
-              {[
-                {
-                  icon: <TbSmartHome className={iconClass} />,
-                  title: "Ready for Your Next Move",
-                  desc: "From cozy retreats to spacious commercial hubs — every property is move-in ready for rent or sale.",
-                },
-                {
-                  icon: <FaMapLocationDot className={iconClass} />,
-                  title: "Prime Locations",
-                  desc: "Strategically located in vibrant, high-demand neighborhoods with strong growth potential.",
-                },
-                {
-                  icon: <LuCalendarFold className={iconClass} />,
-                  title: "Secure & Flexible Deals",
-                  desc: "Transparent agreements, adaptable terms, and safe transactions — every step of the way.",
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="py-4 flex items-center gap-6">
-                  {item.icon}
-                  <div>
-                    <h2 className="text-md mb-1 font-medium">{item.title}</h2>
-                    <p className="text-gray-500 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column - Price & CTA */}
-          <div className="shadow-xl rounded-2xl p-8 border ml-0 md:ml-4 h-fit border-gray-100">
-            <div className="flex gap-2">
-              <h1 className="text-2xl font-medium">$149</h1>
-              <p className="text-gray-700 mt-1">per perch</p>
-            </div>
-            <p className="my-4 text-gray-500">
-              Discover an exceptional opportunity to own or invest in one of
-              Colombo’s most sought-after properties.
-            </p>
-            <button>
-              <a
-                href="tel:+94761676603"
-                className="px-6 py-2.5 rounded-lg flex items-center text-center font-semibold text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
-              >
-                Reserve for Viewings
-              </a>
-            </button>
-            <p className="text-xs mt-3 text-gray-400">
-              *No payment required — inquiries only.
-            </p>
-          </div>
-
-          {/* Bottom Section - Description & Features */}
-          <div className="mt-6 md:mt-0">
-            <h1 className="text-xl font-semibold">Description</h1>
-            <div className="py-4 pb-8 border-b border-gray-200">
-              <p className="text-gray-600 text-sm">
-                Experience modern living at its finest with this premium
-                serviced apartment — thoughtfully designed for comfort,
-                convenience, and style in the heart of Colombo.
-              </p>
-            </div>
-
-            <div className="pt-8 border-b border-gray-200">
-              <h1 className="text-xl font-medium">What This Place Offers</h1>
-              <div className="grid grid-cols-none md:grid-cols-2 gap-x-6 my-4 text-gray-700">
-                {[
-                  {
-                    icon: <PiElevatorDuotone className={iconClass} />,
-                    title: "24/7 Lift Access",
-                    desc: "High-speed elevators available anytime for maximum convenience.",
-                  },
-                  {
-                    icon: <MdPool className={iconClass} />,
-                    title: "Swimming Pool",
-                    desc: "Refresh and unwind in a well-maintained pool, perfect for leisure and fitness.",
-                  },
-                  {
-                    icon: <TbParkingCircle className={iconClass} />,
-                    title: "Secure Parking",
-                    desc: "Dedicated, monitored parking ensuring safety for your vehicles.",
-                  },
-                  {
-                    icon: <FaRegSnowflake className={iconClass} />,
-                    title: "Air Conditioning",
-                    desc: "Enjoy year-round comfort with efficient climate control.",
-                  },
-                  {
-                    icon: <FaWifi className={iconClass} />,
-                    title: "High-Speed Internet",
-                    desc: "Reliable, fast connectivity for both work and entertainment.",
-                  },
-                  {
-                    icon: <BiSolidCctv className={iconClass} />,
-                    title: "Security System",
-                    desc: "CCTV coverage and secure access points for complete peace of mind.",
-                  },
-                  {
-                    icon: <FaDumbbell className={iconClass} />,
-                    title: "Gym & Fitness Center",
-                    desc: "State-of-the-art fitness facilities to keep you active and healthy.",
-                  },
-                  {
-                    icon: <PiPottedPlantBold className={iconClass} />,
-                    title: "Garden & Green Spaces",
-                    desc: "Beautifully landscaped areas for relaxation and outdoor enjoyment.",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="py-4 flex items-center gap-6">
-                    {item.icon}
-                    <div>
-                      <h2 className="text-md mb-1 font-medium">{item.title}</h2>
-                      <p className="text-gray-500 text-sm">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
+        {/* Mobile Slider */}
+        <div className="block md:hidden w-full">
+          <Slider {...mobileSettings}>
+            {images.map((img, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={img}
+                  alt={`mobile-slide-${index}`}
+                  className="w-full h-[300px] object-cover"
+                />
               </div>
-            </div>
+            ))}
+          </Slider>
+        </div>
 
-            <div className="py-8">
-              <h1 className="text-xl font-medium">Locate This Property</h1>
-              {/* <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.28096487474!2d79.82563498750112!3d6.927079721596047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2597fce3e72e1%3A0x26a28452c18a2bb6!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1689301736332!5m2!1sen!2sus"
-                width="600"
-                height="450"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe> */}
-            </div>
+        {/* Desktop Layout */}
+        <div className="hidden md:flex rounded-2xl overflow-hidden">
+          {/* Main Image */}
+          <img
+            src={mainImage}
+            alt="listing"
+            className="w-[49.2%] h-[500px] object-cover cursor-pointer rounded-l-2xl transition-transform hover:scale-[1.02] duration-300 shadow-md"
+            onClick={() => !isMobile && setLightboxOpen(true)}
+          />
+
+          {/* Thumbnails */}
+          <div className="grid grid-cols-2 gap-3 w-full pl-3 p-0">
+            {images.slice(1, MAX_VISIBLE).map((img, index) => {
+              const isLastVisible =
+                index === MAX_VISIBLE - 2 && images.length > MAX_VISIBLE;
+
+              return (
+                <div
+                  key={index}
+                  className={`relative h-[245px] cursor-pointer overflow-hidden ${
+                    index === 1
+                      ? "rounded-tr-2xl"
+                      : index === 3
+                      ? "rounded-br-2xl"
+                      : ""
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`thumbnail-${index}`}
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
+                    onClick={() => !isLastVisible && setMainImage(img)}
+                  />
+
+                  {isLastVisible && (
+                    <button
+                      onClick={() => !isMobile && setLightboxOpen(true)}
+                      className="absolute bottom-4 right-4 bg-white bg-opacity-95 cursor-pointer text-black flex gap-2 items-center text-sm font-semibold px-3 py-2 rounded-lg shadow-lg hover:bg-opacity-100 transition"
+                    >
+                      <RiGalleryView2 size={20} /> Show all photos
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Lightbox */}
+      {lightboxOpen && !isMobile && (
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-white bg-opacity-95 backdrop-blur-sm flex justify-center p-6"
+          onClick={() => setLightboxOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image gallery"
+        >
+          <div
+            className="relative max-w-[800px] w-full rounded-xl bg-white p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-0 right-0 text-black text-4xl cursor-pointer font-bold hover:text-orange-400 transition"
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close gallery"
+            >
+              &times;
+            </button>
+
+            <div className="flex flex-col gap-6">
+              {(() => {
+                const blocks = [];
+                let i = 0;
+
+                while (i < images.length) {
+                  // Big image
+                  blocks.push(
+                    <img
+                      key={`big-${i}`}
+                      src={images[i]}
+                      alt={`Gallery big image ${i + 1}`}
+                      className="w-full rounded-xl max-h-[60vh]"
+                      loading="lazy"
+                    />
+                  );
+                  i++;
+
+                  if (i < images.length) {
+                    const twoImages = images.slice(i, i + 2);
+                    blocks.push(
+                      <div key={`two-${i}`} className="grid grid-cols-2 gap-4">
+                        {twoImages.map((img, idx) => (
+                          <img
+                            key={`small-${i + idx}`}
+                            src={img}
+                            alt={`Gallery image ${i + idx + 1}`}
+                            className="w-full rounded-xl shadow-lg object-cover h-[300px]"
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    );
+                    i += 2;
+                  }
+                }
+                return blocks;
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
-export default Info;
+export default Hero;

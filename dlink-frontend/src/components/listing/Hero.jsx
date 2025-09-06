@@ -1,36 +1,59 @@
 import React, { useState, useEffect } from "react";
-import Property from "../../assets/property.jpg";
 import { LuShare } from "react-icons/lu";
 import { RiGalleryView2 } from "react-icons/ri";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import supabase from "../../config/supabaseClient";
+import { useParams } from "react-router-dom";
+import Property from "../../assets/property.jpg"; // fallback image
 
 const Hero = () => {
-  const images = [
-    Property,
-    Property,
-    Property,
-    Property,
-    Property,
-    Property,
-    Property,
-  ];
-  const [mainImage, setMainImage] = useState(images[0]);
+  const { id } = useParams(); // fetch property by ID
+  const [listing, setListing] = useState(null);
+  const [images, setImages] = useState([Property]);
+  const [mainImage, setMainImage] = useState(Property);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const MAX_VISIBLE = 5;
-
-  // Track if mobile view to disable popup on mobile
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768); // md breakpoint in Tailwind (768px)
+  // Fetch listing images from Supabase
+  const fetchListing = async () => {
+    if (!id) return;
+
+    const { data, error } = await supabase
+      .from("listings")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching listing:", error);
+      setListing(null);
+      setImages([Property]);
+      setMainImage(Property);
+    } else if (data) {
+      const imgs =
+        data.image_urls && data.image_urls.length > 0 ? data.image_urls : [Property];
+      setListing({
+        title: data.property_title || "Property Title",
+        date: data.updated_at
+          ? new Date(data.updated_at).toLocaleDateString()
+          : "N/A",
+      });
+      setImages(imgs);
+      setMainImage(imgs[0]);
     }
+  };
+
+  useEffect(() => {
+    fetchListing();
+
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [id]);
 
   const mobileSettings = {
     dots: false,
@@ -41,20 +64,20 @@ const Hero = () => {
     arrows: false,
   };
 
+  if (!listing) return <p className="text-center mt-10 text-gray-500">Loading...</p>;
+
   return (
     <>
       <div className="max-w-[1200px] mx-auto mt-22 xl:px-0 md:px-6 flex md:flex flex-col-reverse md:flex-col">
         {/* Header */}
         <div className="pt-4 md:pt-10 mb-6 mx-5 md:mx-0 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div className="flex-1">
-            <h1 className="text-lg md:text-2xl font-semibold">
-              Modern Apartment in Dehiwela, Colombo
-            </h1>
+            <h1 className="text-lg md:text-2xl font-semibold">{listing.title}</h1>
             <h2 className="block md:hidden pt-2 mb-1 text-gray-800 font-medium text-sm">
               Entire Serviced Apartment in Colombo, Sri Lanka
             </h2>
             <p className="py-1 text-xs md:text-sm font-normal text-gray-400">
-              Updated: 9th Aug 2025
+              Updated: {listing.date}
             </p>
           </div>
 
@@ -70,7 +93,7 @@ const Hero = () => {
           </button>
         </div>
 
-        {/* Mobile Slider only, no lightbox */}
+        {/* Mobile Slider */}
         <div className="block md:hidden w-full">
           <Slider {...mobileSettings}>
             {images.map((img, index) => (
@@ -92,7 +115,7 @@ const Hero = () => {
             src={mainImage}
             alt="listing"
             className="w-[49.2%] h-[500px] object-cover cursor-pointer rounded-l-2xl transition-transform hover:scale-[1.02] duration-300 shadow-md"
-            onClick={() => !isMobile && setLightboxOpen(true)} // open only on desktop
+            onClick={() => !isMobile && setLightboxOpen(true)}
           />
 
           {/* Thumbnails */}
@@ -121,7 +144,7 @@ const Hero = () => {
 
                   {isLastVisible && (
                     <button
-                      onClick={() => !isMobile && setLightboxOpen(true)} // open only on desktop
+                      onClick={() => !isMobile && setLightboxOpen(true)}
                       className="absolute bottom-4 right-4 bg-white bg-opacity-95 cursor-pointer text-black flex gap-2 items-center text-sm font-semibold px-3 py-2 rounded-lg shadow-lg hover:bg-opacity-100 transition"
                     >
                       <RiGalleryView2 size={20} /> Show all photos
@@ -134,7 +157,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Lightbox only on desktop: simple vertical gallery */}
+      {/* Lightbox */}
       {lightboxOpen && !isMobile && (
         <div
           className="fixed inset-0 z-50 overflow-y-auto bg-white bg-opacity-95 backdrop-blur-sm flex justify-center p-6"
@@ -147,7 +170,6 @@ const Hero = () => {
             className="relative max-w-[800px] w-full rounded-xl bg-white p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               className="absolute top-0 right-0 text-black text-4xl cursor-pointer font-bold hover:text-orange-400 transition"
               onClick={() => setLightboxOpen(false)}
@@ -156,19 +178,17 @@ const Hero = () => {
               &times;
             </button>
 
-            {/* Gallery layout with pattern */}
             <div className="flex flex-col gap-6">
               {(() => {
                 const blocks = [];
-                const imgs = images;
                 let i = 0;
 
-                while (i < imgs.length) {
-                  // 1 big image full width
+                while (i < images.length) {
+                  // Big image
                   blocks.push(
                     <img
                       key={`big-${i}`}
-                      src={imgs[i]}
+                      src={images[i]}
                       alt={`Gallery big image ${i + 1}`}
                       className="w-full rounded-xl max-h-[60vh]"
                       loading="lazy"
@@ -176,9 +196,8 @@ const Hero = () => {
                   );
                   i++;
 
-                  // next two images side by side if available
-                  if (i < imgs.length) {
-                    const twoImages = imgs.slice(i, i + 2);
+                  if (i < images.length) {
+                    const twoImages = images.slice(i, i + 2);
                     blocks.push(
                       <div key={`two-${i}`} className="grid grid-cols-2 gap-4">
                         {twoImages.map((img, idx) => (

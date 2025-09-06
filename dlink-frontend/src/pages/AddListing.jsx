@@ -40,7 +40,6 @@ const PropertyForm = () => {
     "Garden & Green Spaces",
   ];
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
@@ -58,33 +57,47 @@ const PropertyForm = () => {
     }
   };
 
-  // Handle multiple image uploads
   const handleImageUpload = async (e) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
     try {
       setUploading(true);
-      const files = e.target.files;
-      if (!files || files.length === 0) return;
-
       const uploadedUrls = [];
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const filePath = `images/${Date.now()}_${file.name}`;
 
-        const { data, error } = await supabase.storage
-          .from("listings")
-          .upload(filePath, file);
-
-        if (error) {
-          console.error("Upload error:", error);
+        // Optional: limit file size to 5MB
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`${file.name} is too large! Max 5MB.`);
           continue;
         }
 
-        const { data: publicUrlData } = supabase.storage
+        const filePath = `images/${Date.now()}_${file.name}`;
+
+        // Upload file to "listings" bucket
+        const { error: uploadError } = await supabase.storage
+          .from("listings") // make sure bucket "listings" exists in Supabase
+          .upload(filePath, file, { cacheControl: "3600", upsert: false });
+
+        if (uploadError) {
+          console.error("Upload error:", uploadError.message);
+          continue;
+        }
+
+        const { data: publicUrlData, error: urlError } = supabase.storage
           .from("listings")
           .getPublicUrl(filePath);
 
-        uploadedUrls.push(publicUrlData.publicUrl);
+        if (urlError) {
+          console.error("Public URL error:", urlError.message);
+          continue;
+        }
+
+        if (publicUrlData?.publicUrl) {
+          uploadedUrls.push(publicUrlData.publicUrl);
+        }
       }
 
       setNewListing((prev) => ({
@@ -92,13 +105,12 @@ const PropertyForm = () => {
         image_urls: [...prev.image_urls, ...uploadedUrls],
       }));
     } catch (error) {
-      console.error("Error uploading image:", error.message);
+      console.error("Error uploading images:", error.message);
     } finally {
       setUploading(false);
     }
   };
 
-  // Submit listing
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -111,6 +123,7 @@ const PropertyForm = () => {
       sqft: newListing.sqft ? Number(newListing.sqft) : null,
       floors: newListing.floors ? Number(newListing.floors) : null,
       price: newListing.price ? Number(newListing.price) : null,
+      image_urls: newListing.image_urls.length ? newListing.image_urls : [],
     };
 
     const { data, error } = await supabase
@@ -120,10 +133,9 @@ const PropertyForm = () => {
       .single();
 
     if (error) {
-      console.log("Error adding listing: ", error);
+      console.error("Error adding listing:", error.message);
     } else {
       setListings((prev) => [...prev, data]);
-      // Reset form
       setNewListing({
         property_title: "",
         property_type: "",
@@ -155,15 +167,15 @@ const PropertyForm = () => {
       <div className="max-w-[1000px] mx-auto">
         <div className="bg-white rounded-xl p-10 shadow-xl">
           <h1 className="text-2xl font-semibold text-gray-700 mb-2">
-            Add a new Listing
+            Add a New Listing
           </h1>
-          <p className="text-gray-400">
+          <p className="text-gray-400 mb-6">
             Fill in property details below to add new listing information.
           </p>
 
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {/* Property Title */}
             <div className="flex flex-col gap-2">
@@ -176,7 +188,7 @@ const PropertyForm = () => {
                 value={newListing.property_title}
                 onChange={handleChange}
                 placeholder="Property Title"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               />
             </div>
@@ -190,7 +202,7 @@ const PropertyForm = () => {
                 name="property_type"
                 value={newListing.property_type}
                 onChange={handleChange}
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               >
                 <option value="">Select</option>
@@ -212,7 +224,7 @@ const PropertyForm = () => {
                 value={newListing.city}
                 onChange={handleChange}
                 placeholder="Town/City"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               />
             </div>
@@ -226,7 +238,7 @@ const PropertyForm = () => {
                 name="location"
                 value={newListing.location}
                 onChange={handleChange}
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               >
                 <option value="">Select</option>
@@ -244,7 +256,7 @@ const PropertyForm = () => {
                 name="listing_type"
                 value={newListing.listing_type}
                 onChange={handleChange}
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               >
                 <option value="">Select</option>
@@ -260,7 +272,7 @@ const PropertyForm = () => {
                 name="status"
                 value={newListing.status}
                 onChange={handleChange}
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
                 required
               >
                 <option value="Available">Available</option>
@@ -276,7 +288,7 @@ const PropertyForm = () => {
                 name="is_furnished"
                 value={newListing.is_furnished}
                 onChange={handleChange}
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               >
                 <option value="">Select</option>
                 <option value="Furnished">Furnished</option>
@@ -296,7 +308,7 @@ const PropertyForm = () => {
                 value={newListing.owner}
                 onChange={handleChange}
                 placeholder="Owner Name"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -309,7 +321,7 @@ const PropertyForm = () => {
                 value={newListing.bedrooms}
                 onChange={handleChange}
                 placeholder="Bedrooms"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -322,7 +334,7 @@ const PropertyForm = () => {
                 value={newListing.bathrooms}
                 onChange={handleChange}
                 placeholder="Bathrooms"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -335,7 +347,7 @@ const PropertyForm = () => {
                 value={newListing.perches}
                 onChange={handleChange}
                 placeholder="Perches"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -348,7 +360,7 @@ const PropertyForm = () => {
                 value={newListing.sqft}
                 onChange={handleChange}
                 placeholder="Sq Ft"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -361,7 +373,7 @@ const PropertyForm = () => {
                 value={newListing.floors}
                 onChange={handleChange}
                 placeholder="Floors"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -376,7 +388,7 @@ const PropertyForm = () => {
                 value={newListing.building_age}
                 onChange={handleChange}
                 placeholder="Years"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -391,7 +403,7 @@ const PropertyForm = () => {
                 value={newListing.maintain_fee}
                 onChange={handleChange}
                 placeholder="Maintenance Fee"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -404,7 +416,7 @@ const PropertyForm = () => {
                 value={newListing.price}
                 onChange={handleChange}
                 placeholder="Price"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -435,7 +447,7 @@ const PropertyForm = () => {
                 value={newListing.description}
                 onChange={handleChange}
                 placeholder="Property description"
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -447,7 +459,7 @@ const PropertyForm = () => {
                 value={newListing.remarks}
                 onChange={handleChange}
                 placeholder="Any additional notes..."
-                className="py-2 px-4 border border-gray-100 rounded-lg"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
 
@@ -460,7 +472,7 @@ const PropertyForm = () => {
                 type="file"
                 multiple
                 onChange={handleImageUpload}
-                className="py-2 px-4 border border-gray-100 text-gray-500 rounded-lg"
+                className="py-2 px-4 border border-gray-200 text-gray-500 rounded-lg"
               />
               {uploading && (
                 <p className="text-sm text-gray-500">Uploading...</p>
@@ -481,9 +493,14 @@ const PropertyForm = () => {
             <div className="md:col-span-2 flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2.5 cursor-pointer rounded-lg flex items-center text-center font-semibold text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+                disabled={uploading}
+                className={`px-6 py-2.5 cursor-pointer rounded-lg flex items-center text-center font-semibold text-white ${
+                  uploading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-[#f09712] hover:bg-[#ec6d06e8]"
+                }`}
               >
-                Submit Listing
+                {uploading ? "Uploading..." : "Submit Listing"}
               </button>
             </div>
           </form>

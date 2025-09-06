@@ -98,13 +98,13 @@ const Listings = () => {
           {row.map((listing) => (
             <div
               key={listing.id}
-              className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl flex flex-col h-full"
+              className="bg-white rounded-xl border border-gray-200 overflow-hidden group hover:scale-105 duration-300 transition-all hover:shadow-xl flex flex-col h-full"
             >
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={listing.image}
                   alt={listing.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all transform duration-600"
                 />
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
@@ -113,7 +113,7 @@ const Listings = () => {
                 <Link
                   to="/property/listing"
                   onClick={scrollToTop}
-                  className="text-md font-semibold hover:text-[#f09712]"
+                  className="text-md font-semibold hover:text-[#f09712] hover:underline"
                 >
                   {listing.title}
                 </Link>

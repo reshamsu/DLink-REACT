@@ -10,19 +10,19 @@ const cardData = [
     icon: homeIcon,
     title: "Homes",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloremque molestiae amet obcaecati quibusdam ad unde, consectetur numquam.",
+      "Find your dream home with ease. From modern villas to cozy family houses, we connect you with properties tailored to your lifestyle and budget.",
   },
   {
     icon: apartmentIcon,
     title: "Apartments",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloremque molestiae amet obcaecati quibusdam ad unde, consectetur numquam.",
+      "Explore a wide range of apartments in prime locations. Whether you want a city-view penthouse or a comfortable starter flat, we’ve got you covered.",
   },
   {
     icon: landIcon,
     title: "Lands",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloremque molestiae amet obcaecati quibusdam ad unde, consectetur numquam.",
+      "Invest smartly with premium land options. From residential plots to commercial spaces, we help you secure land in growing and valuable locations.",
   },
 ];
 
@@ -62,11 +62,11 @@ const Analytics = () => {
       viewport={{ once: true, amount: 0.4 }}
       variants={sectionVariant}
     >
-      <div className="max-w-[1200px] mx-auto bg-gray-950 rounded-3xl p-8 md:p-10">
+      <div className="max-w-[1200px] mx-auto bg-gradient-to-r gradient-vi bg-gray-900 rounded-3xl p-8 md:p-10">
         <div className="mb-8 px-2 text-center">
           <p className="text-[#f09712] text-lg font-bold mb-2">SERVICE</p>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">What we do</h1>
-          <p className="text-md md:text-lg font-semibold text-gray-400">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">What we do</h1>
+          <p className="text-md font-semibold text-gray-400">
             Full-Service Agents, Modern Technology
           </p>
         </div>
@@ -80,7 +80,7 @@ const Analytics = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
               variants={cardVariants}
-              className="bg-gray-900/20 p-8 rounded-2xl flex flex-col items-center text-center shadow-xl hover:shadow-2xl"
+              className="bg-gray-900/20 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
             >
               <div className="w-24 h-24 mb-4 flex items-center justify-center bg-[#f09712] rounded-full shadow-inner hover:scale-100 transition-transform">
                 <img

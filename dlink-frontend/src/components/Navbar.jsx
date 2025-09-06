@@ -132,10 +132,10 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+            className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-white bg-[#000300] hover:scale-105 duration-300 transition-all"
             onClick={() => handleReload("/listing/add-listing")}
           >
-            <IoIosAdd size={30} /> Add Listing
+            <IoIosAdd size={33} className="text-[#f09712]"/> Add Listing
           </NavLink>
         </div>
 
@@ -151,7 +151,7 @@ const Navbar = () => {
         <div
           className={`${
             nav
-              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white ease-in-out shadow-2xl duration-500 z-[999]"
+              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white text-black ease-in-out shadow-2xl duration-500 z-[999]"
               : "fixed right-[-100%] z-[999]"
           }`}
         >
