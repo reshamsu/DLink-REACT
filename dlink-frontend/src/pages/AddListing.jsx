@@ -1,5 +1,6 @@
 import supabase from "../config/supabaseClient";
 import React, { useState } from "react";
+import { RiSendPlaneFill } from "react-icons/ri";
 
 const PropertyForm = () => {
   const [listings, setListings] = useState([]);
@@ -167,7 +168,7 @@ const PropertyForm = () => {
       <div className="max-w-[1000px] mx-auto">
         <div className="bg-white rounded-xl p-10 shadow-xl">
           <h1 className="text-2xl font-semibold text-gray-700 mb-2">
-            Add a New Listing
+            Add a <span className="text-[#f09712]">New Listing</span>
           </h1>
           <p className="text-gray-400 mb-6">
             Fill in property details below to add new listing information.
@@ -494,13 +495,14 @@ const PropertyForm = () => {
               <button
                 type="submit"
                 disabled={uploading}
-                className={`px-6 py-2.5 cursor-pointer rounded-lg flex items-center text-center font-semibold text-white ${
+                className={`px-6 py-3 rounded-full flex font-semibold items-center justify-center gap-2 hover:gap-3 text-white bg-[#f09712] hover:scale-105 duration-300 transition-all cursor-pointer ${
                   uploading
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-[#f09712] hover:bg-[#ec6d06e8]"
                 }`}
               >
-                {uploading ? "Uploading..." : "Submit Listing"}
+                {uploading ? "Uploading..." : "Submit Listing "}
+                <RiSendPlaneFill size={22} />
               </button>
             </div>
           </form>

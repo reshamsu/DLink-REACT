@@ -10,13 +10,13 @@ const chunkIntoRows = (arr, size) =>
   );
 
 const rowVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: i * 0.2,
-      duration: 0.6,
+      duration: 0.4,
       ease: "easeOut",
     },
   }),
@@ -37,17 +37,33 @@ const Listings = () => {
       console.error("Error fetching listings:", error);
       setListingsData([]);
     } else {
-      const formattedData = data.map((listing) => ({
-        id: listing.id,
-        title: listing.property_title,
-        location: listing.city + " - " + listing.location,
-        is_furnished: listing.is_furnished,
-        bedrooms: listing.bedrooms,
-        bathrooms: listing.bathrooms,
-        type: listing.property_type,
-        status: listing.status,
-        image: listing.image_url || Property, // fallback image
-      }));
+      const formattedData = data.map((listing) => {
+        let images = [];
+
+        // Handle image_urls (array or JSON string)
+        if (Array.isArray(listing.image_urls)) {
+          images = listing.image_urls;
+        } else if (typeof listing.image_urls === "string") {
+          try {
+            images = JSON.parse(listing.image_urls);
+          } catch {
+            images = [];
+          }
+        }
+
+        return {
+          id: listing.id,
+          title: listing.property_title,
+          location: listing.city + " - " + listing.location,
+          is_furnished: listing.is_furnished,
+          bedrooms: listing.bedrooms,
+          bathrooms: listing.bathrooms,
+          type: listing.property_type,
+          status: listing.status,
+          image: images.length > 0 ? images[0] : Property, // use first image or fallback
+        };
+      });
+
       setListingsData(formattedData);
     }
     setLoading(false);
@@ -69,7 +85,8 @@ const Listings = () => {
     );
 
   return (
-    <div className="max-w-[1200px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
+    <div className="max-w-[1240px] min-h-screen mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
+      {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
         <div>
           <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
@@ -85,6 +102,7 @@ const Listings = () => {
         />
       </div>
 
+      {/* Grid of listings */}
       {rows.map((row, rowIndex) => (
         <motion.div
           key={rowIndex}
@@ -100,6 +118,7 @@ const Listings = () => {
               key={listing.id}
               className="bg-white rounded-xl border border-gray-200 overflow-hidden group hover:scale-105 duration-300 transition-all hover:shadow-xl flex flex-col h-full"
             >
+              {/* Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={listing.image}
@@ -109,9 +128,10 @@ const Listings = () => {
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
               </div>
 
+              {/* Content */}
               <div className="flex flex-col flex-1 p-4">
                 <Link
-                  to="/property/listing"
+                  to={`/property/listing/${listing.id}`} // ✅ dynamic link
                   onClick={scrollToTop}
                   className="text-md font-semibold hover:text-[#f09712] hover:underline"
                 >

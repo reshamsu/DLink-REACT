@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { 
-  AiOutlineMenu, 
-  AiOutlineClose, 
-  AiOutlineDown, 
-  AiOutlineUp 
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineDown,
+  AiOutlineUp,
 } from "react-icons/ai";
 import { MdApartment } from "react-icons/md";
 import { BsFillHousesFill } from "react-icons/bs";
@@ -34,16 +34,15 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-700">
-      <div className="flex justify-between items-center h-22 max-w-[1200px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
-        
+    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-black/90 text-gray-100">
+      <div className="flex justify-between items-center h-22 max-w-[1240px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
         {/* Logo */}
         <NavLink
           to="/"
           className="flex items-center hover:text-[#f09712]"
           onClick={() => handleReload("/")}
         >
-          <div className="flex items-center text-gray-800">
+          <div className="flex items-center">
             <img src={logo} alt="" className="w-14 h-14 mr-3" />
             <div className="flex flex-col">
               <h1 className="w-fit flex items-center text-lg font-bold">
@@ -57,7 +56,11 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-10">
           <li>
-            <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
+            <NavLink
+              to="/"
+              className={linkClass}
+              onClick={() => handleReload("/")}
+            >
               Home
             </NavLink>
           </li>
@@ -67,10 +70,17 @@ const Navbar = () => {
             <button
               onClick={() => setDesktopDropdown(!desktopDropdown)}
               className={`flex items-center gap-2 ${
-                isPropertyPage ? "text-[#f09712] font-semibold" : "hover:text-[#f09712]"
+                isPropertyPage
+                  ? "text-[#f09712] font-semibold"
+                  : "hover:text-[#f09712]"
               }`}
             >
-              Find Property {desktopDropdown ? <FaChevronUp size={14}/> : <FaChevronDown size={14}/>}
+              Find Property{" "}
+              {desktopDropdown ? (
+                <FaChevronUp size={14} />
+              ) : (
+                <FaChevronDown size={14} />
+              )}
             </button>
             {desktopDropdown && (
               <div className="absolute top-full mt-2 left-0 bg-white shadow-2xl rounded-xl p-6 z-40 min-w-[200px] border border-gray-200">
@@ -78,7 +88,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="flex items-center gap-3 hover:text-[#f09712]"
+                      className="flex items-center gap-2 hover:text-[#f09712]"
                       onClick={() => handleReload("/property/apartments")}
                     >
                       <MdApartment size={20} /> Apartments
@@ -87,7 +97,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/houses"
-                      className="flex items-center gap-3 hover:text-[#f09712]"
+                      className="flex items-center gap-2 hover:text-[#f09712]"
                       onClick={() => handleReload("/property/houses")}
                     >
                       <BsFillHousesFill size={20} /> Houses
@@ -96,8 +106,10 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/commercial-properties"
-                      className="flex items-center gap-3 hover:text-[#f09712]"
-                      onClick={() => handleReload("/property/commercial-properties")}
+                      className="flex items-center gap-2 hover:text-[#f09712]"
+                      onClick={() =>
+                        handleReload("/property/commercial-properties")
+                      }
                     >
                       <FaBuilding size={20} /> Commercial
                     </NavLink>
@@ -117,12 +129,29 @@ const Navbar = () => {
           </li>
 
           <li>
-            <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
+            <NavLink
+              to="/about"
+              className={linkClass}
+              onClick={() => handleReload("/about")}
+            >
               About
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
+            <NavLink
+              to="/services"
+              className={linkClass}
+              onClick={() => handleReload("/services")}
+            >
+              Services
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={linkClass}
+              onClick={() => handleReload("/contact")}
+            >
               Contact
             </NavLink>
           </li>
@@ -132,10 +161,10 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-white bg-[#000300] hover:scale-105 duration-300 transition-all"
+            className="px-5 py-2 pr-8 rounded-full flex items-center justify-center gap-1 text-white bg-[#f09712] hover:scale-105 duration-300 transition-all"
             onClick={() => handleReload("/listing/add-listing")}
           >
-            <IoIosAdd size={33} className="text-[#f09712]"/> Add Listing
+            <IoIosAdd size={33} /> Add Listing
           </NavLink>
         </div>
 
@@ -144,40 +173,50 @@ const Navbar = () => {
           onClick={handleNav}
           className="block md:hidden relative z-50 cursor-pointer text-[#f09712]"
         >
-          {nav ? <AiOutlineClose size={26} /> : <AiOutlineMenu size={26} />}
+          {nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
         </div>
 
         {/* Mobile Sidebar */}
         <div
           className={`${
             nav
-              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-800 bg-white text-black ease-in-out shadow-2xl duration-500 z-[999]"
+              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-200 bg-gray-950 text-gray-100 ease-in-out shadow-2xl duration-500 z-[999]"
               : "fixed right-[-100%] z-[999]"
           }`}
         >
-          <div className="flex items-center text-gray-800 py-7 px-7">
+          <div className="flex items-center py-7 px-7">
             <img src={logo} alt="" className="w-14 h-14 mr-3" />
             <div className="flex flex-col">
-              <h1 className="w-fit flex items-center text-lg font-bold">D-LINK</h1>
+              <h1 className="w-fit flex items-center text-lg font-bold">
+                D-LINK
+              </h1>
               <span className="text-xs font-medium">Colombo</span>
             </div>
           </div>
 
           <ul className="px-4 font-medium">
-            <li className="p-4 border-b border-gray-100">
-              <NavLink to="/" className={linkClass} onClick={() => handleReload("/")}>
+            <li className="p-4 border-b border-gray-900">
+              <NavLink
+                to="/"
+                className={linkClass}
+                onClick={() => handleReload("/")}
+              >
                 Home
               </NavLink>
             </li>
 
             {/* Mobile Dropdown */}
-            <li className="p-4 border-b border-gray-50">
+            <li className="p-4 border-b border-gray-900">
               <button
                 className="w-full flex justify-between items-center text-left"
                 onClick={() => setMobileDropdown(!mobileDropdown)}
               >
                 <span
-                  className={`${isPropertyPage ? "text-[#f09712] font-semibold" : "hover:text-[#f09712]"}`}
+                  className={`${
+                    isPropertyPage
+                      ? "text-[#f09712] font-semibold"
+                      : "hover:text-[#f09712]"
+                  }`}
                 >
                   Find Property
                 </span>
@@ -188,7 +227,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-2"
+                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
                       onClick={() => handleReload("/property/apartments")}
                     >
                       Apartments
@@ -197,7 +236,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/houses"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-2"
+                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
                       onClick={() => handleReload("/property/houses")}
                     >
                       Houses
@@ -206,8 +245,10 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/commercial-properties"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-2"
-                      onClick={() => handleReload("/property/commercial-properties")}
+                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
+                      onClick={() =>
+                        handleReload("/property/commercial-properties")
+                      }
                     >
                       Commercial
                     </NavLink>
@@ -225,20 +266,37 @@ const Navbar = () => {
               )}
             </li>
 
-            <li className="p-4 border-b border-gray-50">
-              <NavLink to="/about" className={linkClass} onClick={() => handleReload("/about")}>
+            <li className="p-4 border-b border-gray-900">
+              <NavLink
+                to="/about"
+                className={linkClass}
+                onClick={() => handleReload("/about")}
+              >
                 About
               </NavLink>
             </li>
-            <li className="p-4 border-b border-gray-50">
-              <NavLink to="/contact" className={linkClass} onClick={() => handleReload("/contact")}>
+            <li className="p-4 border-b border-gray-900">
+              <NavLink
+                to="/services"
+                className={linkClass}
+                onClick={() => handleReload("/services")}
+              >
+                Services
+              </NavLink>
+            </li>
+            <li className="p-4 border-b border-gray-900">
+              <NavLink
+                to="/contact"
+                className={linkClass}
+                onClick={() => handleReload("/contact")}
+              >
                 Contact
               </NavLink>
             </li>
             <li className="p-4">
               <NavLink
                 to="/listing/add-listing"
-                className="px-5 py-2 rounded-lg flex items-center justify-center gap-1 text-center text-white bg-[#f09712] hover:bg-[#ec6d06e8]"
+                className="px-5 py-2 pr-8 rounded-full flex items-center justify-center gap-1 text-white bg-[#f09712] hover:scale-105 duration-300 transition-all"
                 onClick={() => handleReload("/listing/add-listing")}
               >
                 <IoIosAdd size={30} /> Add Listing
