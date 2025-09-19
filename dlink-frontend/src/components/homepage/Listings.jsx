@@ -40,7 +40,6 @@ const Listings = () => {
       const formattedData = data.map((listing) => {
         let images = [];
 
-        // Handle image_urls (array or JSON string)
         if (Array.isArray(listing.image_urls)) {
           images = listing.image_urls;
         } else if (typeof listing.image_urls === "string") {
@@ -60,7 +59,7 @@ const Listings = () => {
           bathrooms: listing.bathrooms,
           type: listing.property_type,
           status: listing.status,
-          image: images.length > 0 ? images[0] : Property, // use first image or fallback
+          image: images.length > 0 ? images[0] : Property,
         };
       });
 
@@ -78,11 +77,6 @@ const Listings = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  if (loading)
-    return (
-      <p className="text-center mt-10 text-gray-500">Loading listings...</p>
-    );
 
   return (
     <div className="max-w-[1240px] min-h-screen mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800">
@@ -102,67 +96,78 @@ const Listings = () => {
         />
       </div>
 
-      {/* Grid of listings */}
-      {rows.map((row, rowIndex) => (
-        <motion.div
-          key={rowIndex}
-          custom={rows.length - rowIndex - 1}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={rowVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-6 items-stretch"
-        >
-          {row.map((listing) => (
-            <div
-              key={listing.id}
-              className="bg-white rounded-xl border border-gray-200 overflow-hidden group hover:scale-105 duration-300 transition-all hover:shadow-xl flex flex-col h-full"
+      {/* Loader right after header */}
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <div className="w-8 h-8 border-4 border-[#f09712] border-t-transparent rounded-full animate-spin"></div>
+          <p className="ml-3 text-gray-500">Loading listings...</p>
+        </div>
+      ) : (
+        <>
+          {/* Grid of listings */}
+          {rows.map((row, rowIndex) => (
+            <motion.div
+              key={rowIndex}
+              custom={rows.length - rowIndex - 1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={rowVariants}
+              className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6"
             >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={listing.image}
-                  alt={listing.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all transform duration-600"
-                />
-                <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
-              </div>
-
-              {/* Content */}
-              <div className="flex flex-col flex-1 p-4">
-                <Link
-                  to={`/property/listing/${listing.id}`} // ✅ dynamic link
-                  onClick={scrollToTop}
-                  className="text-md font-semibold hover:text-[#f09712] hover:underline"
+              {row.map((listing) => (
+                <div
+                  key={listing.id}
+                  className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
                 >
-                  {listing.title}
-                </Link>
-                <p className="text-sm text-gray-500 mb-2">
-                  {listing.location}
-                </p>
+                  {/* Image */}
+                  {/* Image */}
+                  <div className="w-full h-60 overflow-hidden relative rounded-3xl">
+                    <img
+                      src={listing.image}
+                      alt={listing.title}
+                      className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600 rounded-3xl"></div>
+                  </div>
 
-                <div className="mt-auto">
-                  <i className="text-xs font-semibold text-gray-800">
-                    {listing.is_furnished}
-                  </i>
-                  <p className="text-xs font-semibold text-gray-700 pt-1 mb-3">
-                    {listing.bedrooms} Bed / {listing.bathrooms} Bath
-                  </p>
-                </div>
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 py-4 px-2">
+                    <Link
+                      to={`/property/listing/${listing.id}`}
+                      onClick={scrollToTop}
+                      className="text-md font-semibold hover:text-[#f09712] hover:underline"
+                    >
+                      {listing.title}
+                    </Link>
+                    <p className="text-sm text-gray-500 mb-2">
+                      {listing.location}
+                    </p>
 
-                <div className="flex justify-between items-end">
-                  <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
-                    {listing.status}
-                  </span>
-                  <p className="text-sm text-[#f09712] font-semibold">
-                    {listing.type}
-                  </p>
+                    <div className="mt-auto">
+                      <i className="text-xs font-semibold text-gray-800">
+                        {listing.is_furnished}
+                      </i>
+                      <p className="text-xs font-semibold text-gray-700 pt-1 mb-3">
+                        {listing.bedrooms} Bed / {listing.bathrooms} Bath
+                      </p>
+                    </div>
+
+                    <div className="flex justify-between items-end">
+                      <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
+                        {listing.status}
+                      </span>
+                      <p className="text-sm text-[#f09712] font-semibold">
+                        {listing.type}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ))}
+            </motion.div>
           ))}
-        </motion.div>
-      ))}
+        </>
+      )}
     </div>
   );
 };

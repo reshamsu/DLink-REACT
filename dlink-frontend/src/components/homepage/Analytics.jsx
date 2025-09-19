@@ -28,7 +28,7 @@ const cardData = [
 
 // For the full container
 const sectionVariant = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 0 },
   visible: {
     opacity: 1,
     y: 0,
@@ -41,7 +41,7 @@ const sectionVariant = {
 
 // For the individual cards
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
@@ -63,7 +63,7 @@ const Analytics = () => {
       variants={sectionVariant}
     >
       <div>
-        <div className="max-w-[1240px] mx-auto bg-gradient-to-r gradient-via bg-gray-900 rounded-3xl p-8 md:p-10">
+        <div className="max-w-[1240px] mx-auto bg-black/90 rounded-3xl p-8 md:p-10">
           <div className="mb-8 px-2 text-center">
             <p className="text-[#f09712] text-lg font-bold">SERVICE</p>
             <h1 className="text-2xl md:text-3xl font-bold my-3">Our Expertise</h1>
@@ -79,7 +79,7 @@ const Analytics = () => {
                 custom={index}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.4 }}
+                viewport={{ once: true, amount: 0.2 }}
                 variants={cardVariants}
                 className="bg-gray-900/20 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
               >
