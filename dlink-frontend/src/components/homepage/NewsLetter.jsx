@@ -2,13 +2,29 @@ import React from "react";
 
 const NewsLetter = () => {
   return (
-    <div className="max-w-[1240px] h-full mx-auto xl:px-0 p-8 md:px-10 py-14 text-gray-800">
-      <div className="mb-8 flex flex-col md:flex-row justify-between">
-        <div>
-          <p className="text-[#f09712] text-lg font-bold mb-1">CONNECT</p>
-          <h1 className="text-2xl font-semibold mb-6 md:mb-0">
-            News Letters
+    <div className="w-full py-16 text-black px-8">
+      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3">
+        <div className="lg:col-span-2 my-4">
+          <h1 className="md:text-4xl sm:text-2xl text-xl font-bold py-6">
+            Want tips on how to optimize your property searchings
           </h1>
+          <p>Sign up to our newsletter and stay up to date.</p>
+        </div>
+        <div className="my-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between w-ful">
+            <input
+              className="py-4 px-5 flex w-full rounded-xl bg-white text-black border border-gray-200 focus:border-[#f09712]"
+              type="email"
+              placeholder="Enter Email"
+            />
+            <button className="bg-[#f09712] hover:bg-[#ec6d06e8] transition-all duration-300 hover:scale-105 w-[200px] rounded-full font-medium ml-4 my-6 py-3 text-white cursor-pointer">
+              Subscribe
+            </button>
+          </div>
+          <p>
+            We care about the protection of your data. Read our{" "}
+            <span className="text-[#f09712]">Privacy Policy.</span>
+          </p>
         </div>
       </div>
     </div>

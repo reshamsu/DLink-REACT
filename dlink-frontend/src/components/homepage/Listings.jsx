@@ -83,7 +83,7 @@ const Listings = () => {
   return (
     <div className="max-w-[1240px] min-h-screen mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-600">
       {/* Header */}
-      <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
+      <div className="flex flex-col md:flex-row justify-between text-center md:text-start items-center">
         <div>
           <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
           <h1 className="text-2xl font-semibold mb-6 md:mb-0">
@@ -113,9 +113,9 @@ const Listings = () => {
               custom={rows.length - rowIndex - 1}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.4 }}
               variants={rowVariants}
-              className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6"
+              className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 mt-6"
             >
               {row.map((listing) => (
                 <div
@@ -146,23 +146,26 @@ const Listings = () => {
                       {listing.location}
                     </p>
 
-                    <div className="mt-auto">
-                      <i className="text-xs font-semibold text-gray-600">
-                        {listing.is_furnished}
-                      </i>
-                      <div className="flex align-center gap-2">
-                        <p className="flex align-center gap-2 text-xs font-bold pt-1 mb-3">
-                          <FaBed size={16} /> {listing.bedrooms} Bed
+                    <div className="mt-auto my-3">
+                      <div className="flex items-center gap-2">
+                        <p className="flex items-center gap-2 text-xs font-bold">
+                          <FaBed size={18} className="text-indigo-400" />{" "}
+                          {listing.bedrooms} Bed
                         </p>
-                        <span>|</span>
-                        <p className="flex align-center gap-2 text-xs font-bold pt-1 mb-3">
-                          <FaBath size={14} /> {listing.bathrooms} Bath
+                        <span className="text-gray-300">|</span>
+                        <p className="flex items-center gap-2 text-xs font-bold">
+                          <FaBath size={16} className="text-orange-400" />{" "}
+                          {listing.bathrooms} Bath
+                        </p>
+                        <span className="text-gray-300">|</span>
+                        <p className="flex items-center gap-2 text-xs font-bold text-teal-500">
+                          {listing.is_furnished}
                         </p>
                       </div>
                     </div>
 
                     <div className="flex justify-between items-end">
-                      <span className="inline-block bg-[palegreen] text-[11px] font-semibold px-3 py-1.5 rounded-lg">
+                      <span className="inline-block bg-green-300 text-black text-[11px] font-semibold px-3 py-1.5 rounded-lg">
                         {listing.status}
                       </span>
                       <p className="text-sm text-[#f09712] font-semibold">
