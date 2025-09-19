@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
           </motion.div>
 
           {/* Content */}
-          <div className="relative flex flex-col items-center justify-center text-gray-300 font-medium px-4 md:px-10">
+          <div className="relative flex flex-col items-center justify-center text-white font-medium px-4 md:px-10">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -47,10 +47,10 @@ const WhyChooseUs = () => {
               variants={fadeInUp}
               className="mb-14 text-center"
             >
-              <p className="text-[#f09712] text-lg font-bold mb-3">
+              <p className="text-[#f09712] text-lg font-bold">
                 OUR EXPERTISE
               </p>
-              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold mb-6">
+              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold my-6">
                 Why Choose Us?
               </h1>
               <p className="text-sm text-gray-400 max-w-md mx-auto">
@@ -96,7 +96,7 @@ const WhyChooseUs = () => {
                 >
                   {item.icon}
                   <div>
-                    <h2 className="text-lg font-semibold mb-1">{item.title}</h2>
+                    <h2 className="text-md font-semibold mb-2">{item.title}</h2>
                     <p className="text-xs md:text-md lg:text-sm text-gray-400">{item.text}</p>
                   </div>
                 </motion.div>

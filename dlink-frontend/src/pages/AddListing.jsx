@@ -291,7 +291,6 @@ const PropertyForm = () => {
                 onChange={handleChange}
                 className="py-2 px-4 border border-gray-200 rounded-lg"
               >
-                <option value="">Select</option>
                 <option value="Furnished">Furnished</option>
                 <option value="Fully-Furnished">Fully Furnished</option>
                 <option value="Unfurnished">Unfurnished</option>

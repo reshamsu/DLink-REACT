@@ -81,7 +81,7 @@ const Analytics = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={cardVariants}
-                className="bg-gray-900/20 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
+                className="bg-black/10 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
               >
                 <div className="w-24 h-24 mb-4 flex items-center justify-center bg-[#f09712] rounded-full shadow-inner hover:scale-100 transition-transform">
                   <img

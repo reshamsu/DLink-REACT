@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineClose,
@@ -180,22 +180,21 @@ const Navbar = () => {
         <div
           className={`${
             nav
-              ? "fixed left-0 top-0 w-[64%] h-full border-l border-l-gray-200 bg-gray-950 text-gray-100 ease-in-out shadow-2xl duration-500 z-[999]"
+              ? "fixed left-0 top-0 w-[64%] h-full border-l bg-white flex flex-col justify-between text-gray-800 ease-in-out shadow-2xl duration-500 z-[999]"
               : "fixed right-[-100%] z-[999]"
           }`}
         >
-          <div className="flex items-center py-7 px-7">
-            <img src={logo} alt="" className="w-14 h-14 mr-3" />
-            <div className="flex flex-col">
-              <h1 className="w-fit flex items-center text-lg font-bold">
-                D-LINK
-              </h1>
-              <span className="text-xs font-medium">Colombo</span>
-            </div>
-          </div>
-
           <ul className="px-4 font-medium">
-            <li className="p-4 border-b border-gray-900">
+            <div className="flex items-center py-8 px-3">
+              <img src={logo} alt="" className="w-14 h-14 mr-3" />
+              <div className="flex flex-col">
+                <h1 className="w-fit flex items-center text-lg font-bold">
+                  D-LINK
+                </h1>
+                <span className="text-xs font-medium">Colombo</span>
+              </div>
+            </div>
+            <li className="p-4 border-b border-gray-100">
               <NavLink
                 to="/"
                 className={linkClass}
@@ -206,7 +205,7 @@ const Navbar = () => {
             </li>
 
             {/* Mobile Dropdown */}
-            <li className="p-4 border-b border-gray-900">
+            <li className="p-4 border-b border-gray-100">
               <button
                 className="w-full flex justify-between items-center text-left"
                 onClick={() => setMobileDropdown(!mobileDropdown)}
@@ -223,11 +222,11 @@ const Navbar = () => {
                 {mobileDropdown ? <FaChevronUp /> : <FaChevronDown />}
               </button>
               {mobileDropdown && (
-                <ul className="pl-4 mt-6 space-y-4">
+                <ul className="pl-3 mt-6 space-y-4">
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
+                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
                       onClick={() => handleReload("/property/apartments")}
                     >
                       Apartments
@@ -236,7 +235,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/houses"
-                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
+                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
                       onClick={() => handleReload("/property/houses")}
                     >
                       Houses
@@ -245,7 +244,7 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/commercial-properties"
-                      className="block hover:text-[#f09712] border-b border-gray-900 pb-2"
+                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
                       onClick={() =>
                         handleReload("/property/commercial-properties")
                       }
@@ -266,7 +265,7 @@ const Navbar = () => {
               )}
             </li>
 
-            <li className="p-4 border-b border-gray-900">
+            <li className="p-4 border-b border-gray-100">
               <NavLink
                 to="/about"
                 className={linkClass}
@@ -275,7 +274,7 @@ const Navbar = () => {
                 About
               </NavLink>
             </li>
-            <li className="p-4 border-b border-gray-900">
+            <li className="p-4 border-b border-gray-100">
               <NavLink
                 to="/services"
                 className={linkClass}
@@ -284,7 +283,7 @@ const Navbar = () => {
                 Services
               </NavLink>
             </li>
-            <li className="p-4 border-b border-gray-900">
+            <li className="p-4 border-b border-gray-100">
               <NavLink
                 to="/contact"
                 className={linkClass}
@@ -293,16 +292,16 @@ const Navbar = () => {
                 Contact
               </NavLink>
             </li>
-            <li className="p-4">
-              <NavLink
-                to="/listing/add-listing"
-                className="px-5 py-2 pr-8 rounded-full flex items-center justify-center gap-1 text-white bg-[#f09712] hover:scale-105 duration-300 transition-all"
-                onClick={() => handleReload("/listing/add-listing")}
-              >
-                <IoIosAdd size={30} /> Add Listing
-              </NavLink>
-            </li>
           </ul>
+          <Link className="flex justify-center w-full p-8">
+            <NavLink
+              to="/listing/add-listing"
+              className="px-6 py-3 pr-8 rounded-full flex items-center justify-center gap-1 text-white bg-[#f09712] hover:scale-105 duration-300 transition-all"
+              onClick={() => handleReload("/listing/add-listing")}
+            >
+              <IoIosAdd size={30} /> Add Listing
+            </NavLink>
+          </Link>
         </div>
       </div>
     </div>

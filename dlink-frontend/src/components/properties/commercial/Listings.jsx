@@ -47,10 +47,10 @@ const Listings = () => {
         bathrooms: listing.bathrooms,
         type: listing.property_type,
         status: listing.status,
-        image: listing.image_url || Property, // fallback image
+        image: listing.image_url || Property, // fallback
       }));
 
-      // FILTER only commercial properties
+      // FILTER only commercial
       const commercial = formattedData.filter(
         (listing) => listing.type.toLowerCase() === "commercial"
       );
@@ -70,13 +70,9 @@ const Listings = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (loading)
-    return (
-      <p className="text-center mt-10 text-gray-500">Loading listings...</p>
-    );
-
   return (
-    <div className="max-w-[1200px] mx-auto xl:px-0 p-6 md:px-6 py-14 text-gray-800 pt-33 h-screen">
+    <div className="max-w-[1200px] mx-auto mt-20 xl:px-0 p-6 md:px-6 py-14 text-gray-800 min-h-screen">
+      {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
         <div>
           <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
@@ -92,7 +88,13 @@ const Listings = () => {
         />
       </div>
 
-      {listingsData.length === 0 ? (
+      {/* Loader */}
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <div className="w-8 h-8 border-4 border-[#f09712] border-t-transparent rounded-full animate-spin"></div>
+          <p className="ml-3 text-gray-500">Loading listings...</p>
+        </div>
+      ) : listingsData.length === 0 ? (
         <p className="text-center text-gray-500 mt-10">
           No Commercial Properties Found
         </p>
@@ -110,22 +112,24 @@ const Listings = () => {
             {row.map((listing) => (
               <div
                 key={listing.id}
-                className="bg-white rounded-xl border border-gray-200 overflow-hidden group transition duration-300 hover:shadow-xl flex flex-col h-full"
+                className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
               >
-                <div className="relative h-48 overflow-hidden">
+                {/* Image */}
+                <div className="relative h-48 rounded-3xl overflow-hidden">
                   <img
                     src={listing.image}
                     alt={listing.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 rounded-3xl"
                   />
-                  <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600"></div>
+                  <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600 rounded-3xl"></div>
                 </div>
 
+                {/* Content */}
                 <div className="flex flex-col flex-1 p-4">
                   <Link
-                    to="/property/listing"
+                    to={`/property/listing/${listing.id}`}
                     onClick={scrollToTop}
-                    className="text-md font-semibold hover:text-[#f09712]"
+                    className="text-md font-semibold hover:text-[#f09712] hover:underline"
                   >
                     {listing.title}
                   </Link>
