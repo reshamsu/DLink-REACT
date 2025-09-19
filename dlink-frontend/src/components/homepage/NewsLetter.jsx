@@ -2,10 +2,10 @@ import React from "react";
 
 const NewsLetter = () => {
   return (
-    <div className="w-full py-16 text-black px-8">
-      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3">
+    <div className="text-black">
+      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3 gap-4 py-16 px-8">
         <div className="lg:col-span-2 my-4">
-          <h1 className="md:text-4xl sm:text-2xl text-xl font-bold py-6">
+          <h1 className="md:text-2xl lg:text-4xl text-lg font-bold py-2 md:py-6">
             Want tips on how to optimize your property searchings
           </h1>
           <p>Sign up to our newsletter and stay up to date.</p>
@@ -17,11 +17,11 @@ const NewsLetter = () => {
               type="email"
               placeholder="Enter Email"
             />
-            <button className="bg-[#f09712] hover:bg-[#ec6d06e8] transition-all duration-300 hover:scale-105 w-[200px] rounded-full font-medium ml-4 my-6 py-3 text-white cursor-pointer">
+            <button className="bg-[#f09712] hover:bg-[#ec6d06e8] text-base transition-all duration-300 hover:scale-105 w-[200px] rounded-full font-medium ml-4 my-6 py-3 text-white cursor-pointer">
               Subscribe
             </button>
           </div>
-          <p>
+          <p className="text-sm lg:text-base">
             We care about the protection of your data. Read our{" "}
             <span className="text-[#f09712]">Privacy Policy.</span>
           </p>

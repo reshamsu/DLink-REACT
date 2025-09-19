@@ -13,9 +13,9 @@ import logo from "/dlink.png";
 const Footer = () => {
   return (
     <div className="bg-gray-950 text-gray-300 border-t border-gray-900">
-      <div className="max-w-[1240px] mx-auto px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16">
-          <div className="flex flex-col items-center justify-evenly">
+      <div className="max-w-[1240px] mx-auto px-10 py-12">
+        <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-8">
+          <div className="flex flex-col items-center justify-evenly gap-4">
             <NavLink
               to="/"
               className="flex items-start hover:text-[#f09712]"

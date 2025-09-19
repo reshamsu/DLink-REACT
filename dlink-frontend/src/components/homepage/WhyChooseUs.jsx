@@ -20,7 +20,7 @@ const fadeInUp = {
 const WhyChooseUs = () => {
   return (
     <div className="bg-gray-950 text-gray-50">
-      <div className="max-w-[1240px] mx-auto px-8 md:px-8 lg:px-6 py-14">
+      <div className="max-w-[1240px] mx-auto px-8 py-14">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 lg:gap-14 md:gap-4 py-8">
           {/* Image with dark overlay */}
           <motion.div
@@ -47,10 +47,10 @@ const WhyChooseUs = () => {
               variants={fadeInUp}
               className="mb-14 text-center"
             >
-              <p className="text-[#f09712] text-lg font-bold">
+              <p className="text-[#f09712] text-base lg:text-lg font-bold">
                 OUR EXPERTISE
               </p>
-              <h1 className="text-3xl lg:text-5xl md:text-4xl font-bold my-6">
+              <h1 className="text-3xl lg:text-4xl font-bold my-6">
                 Why Choose Us?
               </h1>
               <p className="text-sm text-gray-400 max-w-md mx-auto">

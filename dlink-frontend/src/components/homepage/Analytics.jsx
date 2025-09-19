@@ -55,46 +55,41 @@ const cardVariants = {
 
 const Analytics = () => {
   return (
-    <div
-      className="text-white pt-12 px-6"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={sectionVariant}
+    <div className="px-8"
     >
-      <div>
-        <div className="max-w-[1240px] mx-auto bg-black/90 rounded-3xl p-8 md:p-10">
-          <div className="mb-8 px-2 text-center">
-            <p className="text-[#f09712] text-lg font-bold">SERVICE</p>
-            <h1 className="text-2xl md:text-3xl font-bold my-3">Our Expertise</h1>
-            <p className="text-sm font-semibold text-gray-400">
-              Full-Service Agents, Modern Technology
-            </p>
-          </div>
+      <div className="max-w-[1180px] mx-auto bg-black/90 text-white rounded-3xl mt-14 p-10">
+        <div className="mb-8 px-2 text-center">
+          <p className="text-[#f09712] text-lg font-bold">SERVICE</p>
+          <h1 className="text-2xl md:text-3xl font-bold my-3">Our Expertise</h1>
+          <p className="text-sm font-semibold text-gray-400">
+            Full-Service Agents, Modern Technology
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cardData.map((card, index) => (
-              <motion.div
-                key={index}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={cardVariants}
-                className="bg-black/10 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
-              >
-                <div className="w-24 h-24 mb-4 flex items-center justify-center bg-[#f09712] rounded-full shadow-inner hover:scale-100 transition-transform">
-                  <img
-                    src={card.icon}
-                    alt={card.title}
-                    className="w-20 h-20 rounded-full object-contain"
-                  />
-                </div>
-                <h2 className="text-xl font-semibold mb-4">{card.title}</h2>
-                <p className="text-gray-500 text-sm">{card.content}</p>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-8">
+          {cardData.map((card, index) => (
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={cardVariants}
+              className="bg-black/10 p-8 rounded-2xl flex flex-col items-center text-center hover:scale-105 duration-300 transition-all shadow-xl hover:shadow-2xl"
+            >
+              <div className="w-24 h-24 mb-4 flex items-center justify-center bg-[#f09712] rounded-full shadow-inner hover:scale-100 transition-transform">
+                <img
+                  src={card.icon}
+                  alt={card.title}
+                  className="w-20 h-20 rounded-full object-contain"
+                />
+              </div>
+              <h2 className="text-lg lg:text-xl font-semibold mb-4">
+                {card.title}
+              </h2>
+              <p className="text-gray-500 text-xs lg:text-sm">{card.content}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

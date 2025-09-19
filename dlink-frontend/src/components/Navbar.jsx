@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-black/90 text-gray-100">
-      <div className="flex justify-between items-center h-22 max-w-[1240px] xl:px-0 p-6 md:px-6 py-6 mx-auto font-semibold">
+      <div className="flex justify-between items-center h-22 max-w-[1240px] px-8 py-4 mx-auto font-semibold">
         {/* Logo */}
         <NavLink
           to="/"
@@ -54,7 +54,7 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden lg:flex items-center gap-10">
           <li>
             <NavLink
               to="/"
@@ -161,7 +161,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-5 py-2 pr-8 rounded-full flex items-center justify-center gap-1 hover:gap-2 text-white bg-[#f09712] hover:bg-[#ec6d06e8] hover:scale-105 duration-300 transition-all"
+            className="px-4 py-1.5 pr-6.5 rounded-full flex items-center justify-center gap-1 hover:gap-1.5 text-white bg-[#f09712] hover:bg-[#ec6d06e8] hover:scale-105 duration-300 transition-all"
             onClick={() => handleReload("/listing/add-listing")}
           >
             <IoIosAdd size={33} /> Add Listing
