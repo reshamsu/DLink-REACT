@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import supabase from "../../../config/supabaseClient";
 
+// Utility: split array into chunks
 const chunkIntoRows = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
     arr.slice(i * size, i * size + size)
   );
 
+// Framer Motion animation variants
 const rowVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: (i) => ({
@@ -26,6 +28,7 @@ const Listings = () => {
   const [listingsData, setListingsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch only land-type listings
   const fetchListings = async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -37,21 +40,19 @@ const Listings = () => {
       console.error("Error fetching listings:", error);
       setListingsData([]);
     } else {
-      // Format the data
       const formattedData = data.map((listing) => ({
         id: listing.id,
         title: listing.property_title,
-        location: listing.city + " - " + listing.location,
+        location: `${listing.city} - ${listing.location}`,
         type: listing.property_type,
         status: listing.status,
         image: listing.image_url || Property, // fallback image
       }));
 
-      // FILTER only lands
+      // Keep only land
       const lands = formattedData.filter(
-        (listing) => listing.type.toLowerCase() === "land"
+        (listing) => listing.type?.toLowerCase() === "land"
       );
-
       setListingsData(lands);
     }
     setLoading(false);
@@ -92,9 +93,7 @@ const Listings = () => {
           <p className="ml-3 text-gray-500">Loading land listings...</p>
         </div>
       ) : listingsData.length === 0 ? (
-        <p className="text-center text-gray-500 mt-10">
-          No Land Listings Found
-        </p>
+        <p className="text-center text-gray-500 mt-10">No Land Listings Found</p>
       ) : (
         rows.map((row, rowIndex) => (
           <motion.div

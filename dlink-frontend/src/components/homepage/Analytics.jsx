@@ -84,7 +84,7 @@ const Analytics = () => {
                   className="w-20 h-20 rounded-full object-contain"
                 />
               </div>
-              <h2 className="text-lg lg:text-xl font-semibold mb-4">
+              <h2 className="text-md lg:text-xl font-semibold mb-4">
                 {card.title}
               </h2>
               <p className="text-gray-500 text-xs lg:text-sm">{card.content}</p>

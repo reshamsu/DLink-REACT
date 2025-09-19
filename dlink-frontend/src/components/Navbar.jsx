@@ -91,7 +91,7 @@ const Navbar = () => {
                       className="flex items-center gap-2 hover:text-[#f09712]"
                       onClick={() => handleReload("/property/apartments")}
                     >
-                      <MdApartment size={20} /> Apartments
+                      <MdApartment size={22} /> Apartments
                     </NavLink>
                   </li>
                   <li>

@@ -5,7 +5,7 @@ const NewsLetter = () => {
     <div className="text-black">
       <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3 gap-4 py-16 px-8">
         <div className="lg:col-span-2 my-4">
-          <h1 className="md:text-2xl lg:text-4xl text-lg font-bold py-2 md:py-6">
+          <h1 className="md:text-2xl lg:text-3xl text-lg font-bold py-2 md:py-6">
             Want tips on how to optimize your property searchings
           </h1>
           <p>Sign up to our newsletter and stay up to date.</p>

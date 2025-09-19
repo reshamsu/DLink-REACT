@@ -3,6 +3,7 @@ import Property from "../../../assets/property.jpg";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import supabase from "../../../config/supabaseClient";
+import { FaBed, FaBath } from "react-icons/fa6";
 
 const chunkIntoRows = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
@@ -71,11 +72,11 @@ const Listings = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto mt-20 xl:px-0 p-6 md:px-6 py-14 text-gray-800 min-h-screen">
+    <div className="max-w-[1240px] min-h-screen mx-auto mt-20 xl:px-0 p-6 md:px-6 py-14 text-gray-600">
       {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
         <div>
-          <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
+          <p className="text-[#f09712] text-lg font-bold mb-1">COMMERCIAL</p>
           <h1 className="text-2xl font-semibold mb-6 md:mb-0">
             Featured Commercial Properties
           </h1>
@@ -107,7 +108,7 @@ const Listings = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={rowVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-6 items-stretch"
+            className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6"
           >
             {row.map((listing) => (
               <div
@@ -115,17 +116,17 @@ const Listings = () => {
                 className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
               >
                 {/* Image */}
-                <div className="relative h-48 rounded-3xl overflow-hidden">
+                <div className="w-full h-60 relative rounded-3xl overflow-hidden">
                   <img
                     src={listing.image}
                     alt={listing.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 rounded-3xl"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-3xl"
                   />
                   <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600 rounded-3xl"></div>
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-1 p-4">
+                <div className="flex flex-col flex-1 py-4 px-2">
                   <Link
                     to={`/property/listing/${listing.id}`}
                     onClick={scrollToTop}
@@ -138,12 +139,18 @@ const Listings = () => {
                   </p>
 
                   <div className="mt-auto">
-                    <i className="text-xs font-semibold text-gray-800">
+                    <i className="text-xs font-semibold text-gray-600">
                       {listing.is_furnished}
                     </i>
-                    <p className="text-xs font-semibold text-gray-700 pt-1 mb-3">
-                      {listing.bedrooms} Bed / {listing.bathrooms} Bath
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="flex items-center gap-2 text-xs font-bold pt-1 mb-3">
+                        <FaBed size={16} /> {listing.bedrooms} Bed
+                      </p>
+                      <span>|</span>
+                      <p className="flex items-center gap-2 text-xs font-bold pt-1 mb-3">
+                        <FaBath size={14} /> {listing.bathrooms} Bath
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex justify-between items-end">

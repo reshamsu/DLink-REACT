@@ -124,7 +124,7 @@ const Listings = () => {
                 <Link
                   to={`/property/listing/${listing.id}`}
                   onClick={scrollToTop}
-                  className="text-sm lg:text-base font-semibold hover:text-[#f09712] hover:underline"
+                  className="text-xs lg:text-base font-semibold hover:text-[#f09712] hover:underline"
                 >
                   {listing.title}
                 </Link>
