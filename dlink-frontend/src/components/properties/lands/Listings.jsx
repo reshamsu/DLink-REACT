@@ -113,7 +113,7 @@ const Listings = () => {
                 className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
               >
                 {/* Image */}
-                <div className="relative h-48 rounded-3xl overflow-hidden">
+                <div className="w-full overflow-hidden relative rounded-3xl">
                   <img
                     src={listing.image}
                     alt={listing.title}
@@ -123,7 +123,7 @@ const Listings = () => {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-1 py-4 px-3">
+                <div className="flex flex-col flex-1 py-4 px-2">
                   <Link
                     to={`/property/listing/${listing.id}`}
                     onClick={scrollToTop}
@@ -131,25 +131,25 @@ const Listings = () => {
                   >
                     {listing.title}
                   </Link>
-                  <p className="text-xs lg:text-sm text-gray-500 mb-2">
+                  <p className="text-xs lg:text-sm text-gray-500 my-1">
                     {listing.location}
                   </p>
 
-                  <div className="mt-auto my-2 flex items-center gap-2 text-xs font-bold flex-wrap">
+                  <div className="my-2 flex items-center gap-2 text-xs font-bold flex-wrap">
                     <p className="flex items-center gap-1">
                       <FaBed size={16} className="text-indigo-400" />
                       {listing.bedrooms} Bed
                     </p>
                     <span className="text-gray-300">|</span>
                     <p className="flex items-center gap-1">
-                      <FaBath size={14} className="text-orange-400" />
+                      <FaBath size={16} className="text-orange-400" />
                       {listing.bathrooms} Bath
                     </p>
                     <span className="text-gray-300">|</span>
                     <p className="text-teal-500">{listing.is_furnished}</p>
                   </div>
 
-                  <div className="flex justify-between items-end mt-3">
+                  <div className="flex justify-between items-center my-3">
                     <span className="inline-block bg-green-300 text-black text-[11px] font-semibold px-3 py-1.5 rounded-lg">
                       {listing.status}
                     </span>
