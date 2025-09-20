@@ -73,7 +73,7 @@ const Listings = () => {
   };
 
   return (
-    <div className="max-w-[1240px] min-h-screen mx-auto px-6 md:px-8 py-10 md:py-14 text-gray-600">
+    <div className="max-w-[1240px] min-h-screen mx-auto px-8 py-10 md:py-14 text-gray-600">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between text-center md:text-start items-center mb-8">
         <div>
@@ -98,7 +98,7 @@ const Listings = () => {
         </div>
       ) : (
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
           initial="hidden"
           animate="visible"
         >
@@ -110,11 +110,11 @@ const Listings = () => {
               className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
             >
               {/* Image */}
-              <div className="w-full aspect-[4/3] overflow-hidden relative rounded-3xl">
+              <div className="w-full overflow-hidden relative rounded-3xl">
                 <img
                   src={listing.image}
                   alt={listing.title}
-                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-60 xl:h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-500 rounded-3xl"></div>
               </div>
@@ -124,11 +124,11 @@ const Listings = () => {
                 <Link
                   to={`/property/listing/${listing.id}`}
                   onClick={scrollToTop}
-                  className="text-xs lg:text-base font-semibold hover:text-[#f09712] hover:underline"
+                  className="text-sm lg:text-base font-semibold hover:text-[#f09712] hover:underline"
                 >
                   {listing.title}
                 </Link>
-                <p className="text-sm text-gray-500 mb-2">{listing.location}</p>
+                <p className="text-xs lg:text-sm text-gray-500 mb-2">{listing.location}</p>
 
                 <div className="mt-auto my-2 flex items-center gap-2 text-xs font-bold flex-wrap">
                   <p className="flex items-center gap-1">

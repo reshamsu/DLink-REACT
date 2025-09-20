@@ -72,9 +72,9 @@ const Listings = () => {
   };
 
   return (
-    <div className="max-w-[1240px] min-h-screen mx-auto mt-20 xl:px-0 p-6 md:px-6 py-14 text-gray-600">
+    <div className="max-w-[1240px] min-h-screen mx-auto px-8 py-10 md:py-14 text-gray-600 mt-20">
       {/* Header */}
-      <div className="mb-8 flex flex-col md:flex-row justify-between text-center md:text-start items-center">
+      <div className="flex flex-col md:flex-row justify-between text-center md:text-start items-center mb-8">
         <div>
           <p className="text-[#f09712] text-lg font-bold mb-1">COMMERCIAL</p>
           <h1 className="text-2xl font-semibold mb-6 md:mb-0">
@@ -108,7 +108,7 @@ const Listings = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={rowVariants}
-            className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
           >
             {row.map((listing) => (
               <div
@@ -116,11 +116,11 @@ const Listings = () => {
                 className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
               >
                 {/* Image */}
-                <div className="w-full h-60 relative rounded-3xl overflow-hidden">
+                <div className="w-full relative rounded-3xl overflow-hidden">
                   <img
                     src={listing.image}
                     alt={listing.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-3xl"
+                    className="w-full h-60 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-110 rounded-3xl"
                   />
                   <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-600 rounded-3xl"></div>
                 </div>
@@ -130,11 +130,11 @@ const Listings = () => {
                   <Link
                     to={`/property/listing/${listing.id}`}
                     onClick={scrollToTop}
-                    className="text-md font-semibold hover:text-[#f09712] hover:underline"
+                    className="text-sm lg:text-base font-semibold hover:text-[#f09712] hover:underline"
                   >
                     {listing.title}
                   </Link>
-                  <p className="text-sm text-gray-500 mb-2">
+                  <p className="text-xs lg:text-sm text-gray-500 mb-2">
                     {listing.location}
                   </p>
 
