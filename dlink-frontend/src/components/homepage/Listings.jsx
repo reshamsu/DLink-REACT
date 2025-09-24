@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Property from "../../assets/property.jpg";
+import Property from "../../assets/modern.webp";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import supabase from "../../config/supabaseClient";
@@ -73,12 +73,12 @@ const Listings = () => {
   };
 
   return (
-    <div className="max-w-[1240px] min-h-screen mx-auto px-8 py-10 md:py-14 text-gray-600">
+    <div className="max-w-7xl mx-auto py-10 px-6 2xl:px-0 text-gray-800">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between text-center md:text-start items-center mb-8">
         <div>
-          <p className="text-[#f09712] text-lg font-bold mb-1">LISTINGS</p>
-          <h1 className="text-2xl font-semibold mb-4 md:mb-0">
+          <p className="text-[#f09712] text-base font-bold mb-1">LISTINGS</p>
+          <h1 className="text-xl font-semibold mb-4 md:mb-0">
             Featured Listings
           </h1>
         </div>
@@ -98,7 +98,7 @@ const Listings = () => {
         </div>
       ) : (
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
           initial="hidden"
           animate="visible"
         >
@@ -107,30 +107,30 @@ const Listings = () => {
               key={listing.id}
               custom={index}
               variants={rowVariants}
-              className="bg-white rounded-3xl overflow-hidden group hover:scale-105 duration-300 transition-transform flex flex-col h-full"
+              className="bg-white rounded-xl overflow-hidden group duration-300 transition-transform flex flex-col h-full"
             >
               {/* Image */}
-              <div className="w-full overflow-hidden relative rounded-3xl">
+              <div className="w-full h-70 sm:h-46 md:h-50 overflow-hidden relative rounded-3xl">
                 <img
                   src={listing.image}
                   alt={listing.title}
-                  className="w-full h-60 xl:h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-70 sm:h-46 md:h-50 object-cover transform transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-500 rounded-3xl"></div>
               </div>
 
               {/* Content */}
-              <div className="flex flex-col flex-1 py-4 px-2">
+              <div className="flex flex-col flex-1 py-3 px-2">
                 <Link
                   to={`/property/listing/${listing.id}`}
                   onClick={scrollToTop}
-                  className="text-sm lg:text-base font-semibold hover:text-[#f09712] hover:underline"
+                  className="text-sm font-semibold hover:text-[#f09712] hover:underline line-clamp-1"
                 >
                   {listing.title}
                 </Link>
                 <p className="text-xs lg:text-sm text-gray-500 my-1">{listing.location}</p>
 
-                <div className="my-2 flex items-center gap-2 text-xs font-bold flex-wrap">
+                <div className="my-2 flex items-center gap-2 text-xs font-semibold flex-wrap line-clamp-1">
                   <p className="flex items-center gap-1">
                     <FaBed size={16} className="text-indigo-400" />
                     {listing.bedrooms} Bed
@@ -145,7 +145,7 @@ const Listings = () => {
                 </div>
 
                 <div className="flex justify-between items-center my-3">
-                  <span className="inline-block bg-green-300 text-black text-[11px] font-semibold px-3 py-1.5 rounded-lg">
+                  <span className="inline-block bg-green-300 text-[11px] font-semibold px-3 py-1.5 rounded-lg">
                     {listing.status}
                   </span>
                   <p className="text-sm text-[#f09712] font-semibold">

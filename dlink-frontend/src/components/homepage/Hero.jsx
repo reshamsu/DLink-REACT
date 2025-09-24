@@ -20,21 +20,21 @@ const Hero = () => {
       ></div>
 
       <div
-        className={`relative z-10 flex flex-col justify-center items-center text-gray-100 h-full px-8 space-y-6 transition-all duration-2000 ease-out ${
+        className={`relative z-10 flex flex-col justify-center items-center text-gray-100 h-full px-8 space-y-4 transition-all duration-2000 ease-out ${
           animate ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
         }`}
       >
         <div className="flex flex-wrap justify-center items-center text-center">
-          <h1 className="text-3xl md:text-5xl font-bold">Find&nbsp;</h1>
+          <h1 className="text-2xl  md:text-3xl lg:text-5xl font-bold">Find&nbsp;</h1>
           <ReactTyped
-            className="text-3xl md:text-5xl font-bold text-[#f09712]"
+            className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#f09712]"
             strings={["Homes", "Apartments", "Villas", "Lands"]}
             typeSpeed={120}
             backSpeed={80}
             loop
           />
         </div>
-        <p className="text-sm md:text-lg font-semibold text-gray-200">Locating the perfect place for your Needs.</p>
+        <p className="text-sm md:text-lg font-semibold text-gray-100">Locating the perfect place for your Needs.</p>
         <input
           type="text"
           placeholder="Search by location or property type"

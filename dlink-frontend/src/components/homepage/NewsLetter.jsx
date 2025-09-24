@@ -3,7 +3,7 @@ import React from "react";
 const NewsLetter = () => {
   return (
     <div className="text-black">
-      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3 gap-4 py-16 px-8">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-4 py-10 px-6 2xl:px-0">
         <div className="lg:col-span-2 my-4">
           <h1 className="md:text-2xl lg:text-3xl text-lg font-bold py-2 md:py-6">
             Want tips on how to optimize your property searchings

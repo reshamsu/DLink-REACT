@@ -8,31 +8,31 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
-import logo from "/dlink.png";
+import logo from "/dlink-colombo.png";
 
 const Footer = () => {
   return (
     <div className="bg-gray-950 text-gray-300 border-t border-gray-900">
-      <div className="max-w-[1240px] mx-auto px-10 py-12">
+      <div className="max-w-7xl mx-auto py-10 px-6 2xl:px-0">
         <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-8">
-          <div className="flex flex-col items-center justify-evenly gap-4">
+          <div className="flex flex-col items-center justify-evenly gap-4 ml-0 lg:ml-10 2xl:ml-0">
             <NavLink
               to="/"
-              className="flex items-start hover:text-[#f09712]"
+              className="flex items-center hover:text-[#f09712]"
               onClick={() => handleReload("/")}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <img src={logo} alt="" className="w-14 h-14" />
                 <div className="flex flex-col">
-                  <h1 className="w-fit flex items-center text-lg font-bold">
+                  <h1 className="w-fit flex items-start text-lg font-bold">
                     D-LINK
                   </h1>
                   <span className="text-xs font-medium">Colombo</span>
                 </div>
               </div>
             </NavLink>
-            <label className="my-6 md:my-0 font-bold tracking-wide">
-              D-LINK PROPERTIES.
+            <label className="text-center text-sm font-bold tracking-wide">
+              “More than real estate — it’s your next chapter.”
             </label>
 
             {/* Social Icons */}
@@ -112,7 +112,9 @@ const Footer = () => {
               <h3 className="font-semibold mb-4 text-gray-300 text-lg">
                 Support
               </h3>
-              <li className="mb-3 hover:text-[#f09712] hover:underline cursor-pointer">FAQ</li>
+              <li className="mb-3 hover:text-[#f09712] hover:underline cursor-pointer">
+                FAQ
+              </li>
               <li className="mb-3 hover:text-[#f09712] hover:underline cursor-pointer">
                 Help Center
               </li>

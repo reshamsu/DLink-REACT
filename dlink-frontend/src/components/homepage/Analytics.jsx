@@ -55,9 +55,8 @@ const cardVariants = {
 
 const Analytics = () => {
   return (
-    <div className="px-8"
-    >
-      <div className="max-w-[1180px] mx-auto bg-black/90 text-white rounded-3xl mt-14 p-10">
+    <div className="py-10">
+      <div className="max-w-7xl mx-auto bg-black/90 text-white rounded-3xl py-10 px-6 2xl:px-0">
         <div className="mb-8 px-2 text-center">
           <p className="text-[#f09712] text-lg font-bold">SERVICE</p>
           <h1 className="text-2xl md:text-3xl font-bold my-3">Our Expertise</h1>
@@ -66,7 +65,7 @@ const Analytics = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-8">
           {cardData.map((card, index) => (
             <motion.div
               key={index}

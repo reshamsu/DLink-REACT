@@ -11,7 +11,7 @@ import { BsFillHousesFill } from "react-icons/bs";
 import { FaBuilding, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { RiLandscapeFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
-import logo from "/dlink.png";
+import logo from "/dlink-colombo.png";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -34,21 +34,21 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-black/90 text-gray-100">
-      <div className="max-w-[1240px] mx-auto flex items-center justify-between py-4 px-6 xl:px-4 md:px-8">
+    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-black">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 2xl:px-0">
         {/* Logo */}
         <NavLink
           to="/"
-          className="flex items-center hover:text-[#f09712]"
+          className="flex items-center hover:text-[#f09712] mr-10"
           onClick={() => handleReload("/")}
         >
-          <div className="flex items-center">
-            <img src={logo} alt="" className="w-14 h-14 mr-3" />
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="" className="w-14 h-14" />
             <div className="flex flex-col">
               <h1 className="w-fit flex items-center text-lg font-bold">
                 D-LINK
               </h1>
-              <span className="text-xs font-medium">Colombo</span>
+              <span className="text-sm font-medium text-[#f09712]">Colombo</span>
             </div>
           </div>
         </NavLink>
@@ -84,7 +84,7 @@ const Navbar = () => {
             </button>
             {desktopDropdown && (
               <div className="absolute top-full mt-2 left-0 bg-white shadow-2xl rounded-xl p-6 z-40 min-w-[200px] border border-gray-200">
-                <ul className="space-y-4 text-gray-700 font-medium">
+                <ul className="space-y-4 text-gray-800 font-semibold">
                   <li>
                     <NavLink
                       to="/property/apartments"
