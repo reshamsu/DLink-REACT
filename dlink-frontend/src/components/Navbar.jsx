@@ -222,11 +222,11 @@ const Navbar = () => {
                 {mobileDropdown ? <FaChevronUp /> : <FaChevronDown />}
               </button>
               {mobileDropdown && (
-                <ul className="pl-3 mt-6 space-y-4">
+                <ul className="pl-3 mt-4 space-y-4 text-sm">
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
+                      className="block hover:text-[#f09712] border-b border-t border-gray-100 py-4"
                       onClick={() => handleReload("/property/apartments")}
                     >
                       Apartments

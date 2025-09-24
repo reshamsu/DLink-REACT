@@ -110,38 +110,36 @@ const Listings = () => {
               className="bg-white rounded-xl overflow-hidden group duration-300 transition-transform flex flex-col h-full"
             >
               {/* Image */}
-              <div className="w-full h-70 sm:h-46 md:h-50 overflow-hidden relative rounded-3xl">
+              <div className="w-full h-64 sm:h-46 md:h-50 overflow-hidden relative rounded-3xl">
                 <img
                   src={listing.image}
                   alt={listing.title}
-                  className="w-full h-70 sm:h-46 md:h-50 object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-64 sm:h-46 md:h-50 object-cover transform transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity duration-500 rounded-3xl"></div>
               </div>
 
               {/* Content */}
-              <div className="flex flex-col flex-1 py-3 px-2">
+              <div className="flex flex-col flex-1 py-4 px-1">
                 <Link
                   to={`/property/listing/${listing.id}`}
                   onClick={scrollToTop}
-                  className="text-sm font-semibold hover:text-[#f09712] hover:underline line-clamp-1"
+                  className="text-base lg:text-sm font-semibold hover:text-[#f09712] hover:underline line-clamp-1"
                 >
                   {listing.title}
                 </Link>
-                <p className="text-xs lg:text-sm text-gray-500 my-1">{listing.location}</p>
+                <p className="text-sm lg:text-[12px] text-gray-600 my-1">{listing.location}  ({listing.is_furnished})</p>
 
                 <div className="my-2 flex items-center gap-2 text-xs font-semibold flex-wrap line-clamp-1">
-                  <p className="flex items-center gap-1">
-                    <FaBed size={16} className="text-indigo-400" />
+                  <p className="flex items-center gap-1.5">
+                    <FaBed size={16} className="text-orange-300" />
                     {listing.bedrooms} Bed
                   </p>
                   <span className="text-gray-300">|</span>
-                  <p className="flex items-center gap-1">
-                    <FaBath size={16} className="text-orange-400" />
+                  <p className="flex items-center gap-1.5">
+                    <FaBath size={16} className="text-orange-300" />
                     {listing.bathrooms} Bath
                   </p>
-                  <span className="text-gray-300">|</span>
-                  <p className="text-teal-500">{listing.is_furnished}</p>
                 </div>
 
                 <div className="flex justify-between items-center my-3">
