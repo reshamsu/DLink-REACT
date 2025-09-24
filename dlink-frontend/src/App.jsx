@@ -11,6 +11,7 @@ import Lands from "./pages/Lands";
 import Listing from "./pages/Listing";
 import NotFound from "./pages/NotFound";
 import AddListing from "./pages/AddListing";
+import Info from "./components/listing/Info";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -30,7 +31,8 @@ function App() {
             element={<Commercial />}
           />
           <Route path="/property/lands-plots" element={<Lands />} />
-          <Route path="/property/listing" element={<Listing />} />
+          <Route path="/property/listing/:id" element={<Listing />} />
+          {/* <Route path="/property/listing/:id" element={<Info />} /> */}
           <Route path="/listing/add-listing" element={<AddListing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

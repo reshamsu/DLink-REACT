@@ -13,7 +13,7 @@ const Hero = () => {
   return (
     <div className="relative w-full pt-[88px] h-[64vh] md:h-[100vh] overflow-hidden">
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        className="absolute inset-0 w-full h-full bg-black/15 bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), url(${Banner})`,
         }}
@@ -34,7 +34,7 @@ const Hero = () => {
             loop
           />
         </div>
-        <p className="text-sm md:text-lg font-semibold text-gray-100">Locating the perfect place for your Needs.</p>
+        <p className="text-xs md:text-lg font-semibold text-gray-100">Locating the perfect place for your Needs.</p>
         <input
           type="text"
           placeholder="Search by location or property type"

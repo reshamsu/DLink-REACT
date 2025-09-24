@@ -69,7 +69,6 @@ const PropertyForm = () => {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
-        // Optional: limit file size to 5MB
         if (file.size > 5 * 1024 * 1024) {
           alert(`${file.name} is too large! Max 5MB.`);
           continue;
@@ -77,9 +76,8 @@ const PropertyForm = () => {
 
         const filePath = `images/${Date.now()}_${file.name}`;
 
-        // Upload file to "listings" bucket
         const { error: uploadError } = await supabase.storage
-          .from("listings") // make sure bucket "listings" exists in Supabase
+          .from("listings")
           .upload(filePath, file, { cacheControl: "3600", upsert: false });
 
         if (uploadError) {
@@ -87,18 +85,11 @@ const PropertyForm = () => {
           continue;
         }
 
-        const { data: publicUrlData, error: urlError } = supabase.storage
+        const { data: publicUrlData } = supabase.storage
           .from("listings")
           .getPublicUrl(filePath);
 
-        if (urlError) {
-          console.error("Public URL error:", urlError.message);
-          continue;
-        }
-
-        if (publicUrlData?.publicUrl) {
-          uploadedUrls.push(publicUrlData.publicUrl);
-        }
+        uploadedUrls.push(publicUrlData.publicUrl);
       }
 
       setNewListing((prev) => ({
@@ -135,6 +126,7 @@ const PropertyForm = () => {
 
     if (error) {
       console.error("Error adding listing:", error.message);
+      alert("Failed to add listing. Check console for details.");
     } else {
       setListings((prev) => [...prev, data]);
       setNewListing({
@@ -160,158 +152,17 @@ const PropertyForm = () => {
         is_furnished: "",
         image_urls: [],
       });
+      alert("Listing added successfully!");
     }
   };
 
-  return (
-    <div className="bg-gray-100 pt-28 pb-8">
-      <div className="max-w-[1000px] mx-auto">
-        <div className="bg-white rounded-xl p-10 shadow-xl">
-          <h1 className="text-2xl font-semibold text-gray-700 mb-2">
-            Add a <span className="text-[#f09712]">New Listing</span>
-          </h1>
-          <p className="text-gray-400 mb-6">
-            Fill in property details below to add new listing information.
-          </p>
-
-          <form
-            onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            {/* Property Title */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Property Title
-              </label>
-              <input
-                type="text"
-                name="property_title"
-                value={newListing.property_title}
-                onChange={handleChange}
-                placeholder="Property Title"
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              />
-            </div>
-
-            {/* Property Type */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Property Type
-              </label>
-              <select
-                name="property_type"
-                value={newListing.property_type}
-                onChange={handleChange}
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              >
-                <option value="">Select</option>
-                <option value="House">House</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Land">Land</option>
-                <option value="Commercial Land & Building">
-                  Commercial Land & Building
-                </option>
-              </select>
-            </div>
-
-            {/* City */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Town / City</label>
-              <input
-                type="text"
-                name="city"
-                value={newListing.city}
-                onChange={handleChange}
-                placeholder="Town/City"
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              />
-            </div>
-
-            {/* Location */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Location / Place
-              </label>
-              <select
-                name="location"
-                value={newListing.location}
-                onChange={handleChange}
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              >
-                <option value="">Select</option>
-                <option value="Land Side">Land Side</option>
-                <option value="Sea Side">Sea Side</option>
-              </select>
-            </div>
-
-            {/* Listing Type */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Listing Type
-              </label>
-              <select
-                name="listing_type"
-                value={newListing.listing_type}
-                onChange={handleChange}
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              >
-                <option value="">Select</option>
-                <option value="Rent">Rent</option>
-                <option value="Sale">Sale</option>
-              </select>
-            </div>
-
-            {/* Status */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Status</label>
-              <select
-                name="status"
-                value={newListing.status}
-                onChange={handleChange}
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-                required
-              >
-                <option value="Available">Available</option>
-                <option value="Sold">Sold</option>
-                <option value="Pending">Pending</option>
-              </select>
-            </div>
-
-            {/* Furnishing */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Furnishing</label>
-              <select
-                name="is_furnished"
-                value={newListing.is_furnished}
-                onChange={handleChange}
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-              >
-                <option value="Furnished">Furnished</option>
-                <option value="Fully-Furnished">Fully Furnished</option>
-                <option value="Unfurnished">Unfurnished</option>
-              </select>
-            </div>
-
-            {/* Owner */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Property Owner
-              </label>
-              <input
-                type="text"
-                name="owner"
-                value={newListing.owner}
-                onChange={handleChange}
-                placeholder="Owner Name"
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-              />
-            </div>
-
+  // Conditional rendering based on property type
+  const renderPropertySpecificFields = () => {
+    switch (newListing.property_type) {
+      case "House":
+      case "Apartment":
+        return (
+          <>
             {/* Bedrooms */}
             <div className="flex flex-col gap-2">
               <label className="font-semibold text-gray-700">Bedrooms</label>
@@ -334,32 +185,6 @@ const PropertyForm = () => {
                 value={newListing.bathrooms}
                 onChange={handleChange}
                 placeholder="Bathrooms"
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-              />
-            </div>
-
-            {/* Perches */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Perches</label>
-              <input
-                type="number"
-                name="perches"
-                value={newListing.perches}
-                onChange={handleChange}
-                placeholder="Perches"
-                className="py-2 px-4 border border-gray-200 rounded-lg"
-              />
-            </div>
-
-            {/* Sq Ft */}
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Sq Ft</label>
-              <input
-                type="number"
-                name="sqft"
-                value={newListing.sqft}
-                onChange={handleChange}
-                placeholder="Sq Ft"
                 className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
@@ -392,20 +217,230 @@ const PropertyForm = () => {
               />
             </div>
 
-            {/* Maintenance Fee */}
+            {/* Furnishing */}
             <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Maintenance Fee
-              </label>
-              <input
-                type="text"
-                name="maintain_fee"
-                value={newListing.maintain_fee}
+              <label className="font-semibold text-gray-700">Furnishing</label>
+              <select
+                name="is_furnished"
+                value={newListing.is_furnished}
                 onChange={handleChange}
-                placeholder="Maintenance Fee"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              >
+                <option default value="Furnished">Furnished</option>
+                <option value="Fully-Furnished">Fully Furnished</option>
+                <option value="Unfurnished">Unfurnished</option>
+              </select>
+            </div>
+          </>
+        );
+      case "Land":
+        return (
+          <>
+            {/* Perches */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Perches</label>
+              <input
+                type="number"
+                name="perches"
+                value={newListing.perches}
+                onChange={handleChange}
+                placeholder="Perches"
                 className="py-2 px-4 border border-gray-200 rounded-lg"
               />
             </div>
+
+            {/* Price per Perch */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Price per Perch</label>
+              <input
+                type="number"
+                name="per_perch"
+                value={newListing.per_perch}
+                onChange={handleChange}
+                placeholder="Price per Perch"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+
+            {/* Sq Ft */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Sq Ft</label>
+              <input
+                type="number"
+                name="sqft"
+                value={newListing.sqft}
+                onChange={handleChange}
+                placeholder="Sq Ft"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+          </>
+        );
+      case "Commercial Land & Building":
+        return (
+          <>
+            {/* Mix fields */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Perches</label>
+              <input
+                type="number"
+                name="perches"
+                value={newListing.perches}
+                onChange={handleChange}
+                placeholder="Perches"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Bedrooms</label>
+              <input
+                type="number"
+                name="bedrooms"
+                value={newListing.bedrooms}
+                onChange={handleChange}
+                placeholder="Bedrooms"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Bathrooms</label>
+              <input
+                type="number"
+                name="bathrooms"
+                value={newListing.bathrooms}
+                onChange={handleChange}
+                placeholder="Bathrooms"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="bg-gray-100 pt-28 pb-8">
+      <div className="max-w-[1000px] mx-auto">
+        <div className="bg-white rounded-xl p-10 shadow-xl">
+          <h1 className="text-2xl font-semibold text-gray-700 mb-2">
+            Add a <span className="text-[#f09712]">New Listing</span>
+          </h1>
+          <p className="text-gray-400 mb-6">
+            Fill in property details below to add new listing information.
+          </p>
+
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {/* Basic fields always visible */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Property Title</label>
+              <input
+                type="text"
+                name="property_title"
+                value={newListing.property_title}
+                onChange={handleChange}
+                placeholder="Property Title"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Property Type</label>
+              <select
+                name="property_type"
+                value={newListing.property_type}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              >
+                <option value="">Select</option>
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Land">Land</option>
+                <option value="Commercial Land & Building">Commercial Land & Building</option>
+              </select>
+            </div>
+
+            {/* City, Location, Listing Type, Status, Owner */}
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Town / City</label>
+              <input
+                type="text"
+                name="city"
+                value={newListing.city}
+                onChange={handleChange}
+                placeholder="Town/City"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Location / Place</label>
+              <select
+                name="location"
+                value={newListing.location}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Land Side">Land Side</option>
+                <option value="Sea Side">Sea Side</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Listing Type</label>
+              <select
+                name="listing_type"
+                value={newListing.listing_type}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Rent">Rent</option>
+                <option value="Sale">Sale</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Status</label>
+              <select
+                name="status"
+                value={newListing.status}
+                onChange={handleChange}
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+                required
+              >
+                <option value="Available">Available</option>
+                <option value="Sold">Sold</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-semibold text-gray-700">Property Owner</label>
+              <input
+                type="text"
+                name="owner"
+                value={newListing.owner}
+                onChange={handleChange}
+                placeholder="Owner Name"
+                className="py-2 px-4 border border-gray-200 rounded-lg"
+              />
+            </div>
+
+            {/* Property-specific fields */}
+            {renderPropertySpecificFields()}
 
             {/* Price */}
             <div className="flex flex-col gap-2">
@@ -465,9 +500,7 @@ const PropertyForm = () => {
 
             {/* Image Upload */}
             <div className="flex flex-col md:col-span-2 gap-2">
-              <label className="font-semibold text-gray-700">
-                Upload Images
-              </label>
+              <label className="font-semibold text-gray-700">Upload Images</label>
               <input
                 type="file"
                 multiple
