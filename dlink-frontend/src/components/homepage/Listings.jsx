@@ -128,7 +128,9 @@ const Listings = () => {
                 >
                   {listing.title}
                 </Link>
-                <p className="text-sm lg:text-[12px] text-gray-600 my-1">{listing.location}  ({listing.is_furnished})</p>
+                <p className="text-sm lg:text-[12px] text-gray-600 my-1">
+                  {listing.location}
+                </p>
 
                 <div className="my-2 flex items-center gap-2 text-xs font-semibold flex-wrap line-clamp-1">
                   <p className="flex items-center gap-1.5">
@@ -141,6 +143,9 @@ const Listings = () => {
                     {listing.bathrooms} Bath
                   </p>
                 </div>
+                <p className="text-xs text-blue-500 font-semibold">
+                  {listing.is_furnished}
+                </p>
 
                 <div className="flex justify-between items-center my-3">
                   <span className="inline-block bg-green-300 text-[11px] font-semibold px-3 py-1.5 rounded-lg">
