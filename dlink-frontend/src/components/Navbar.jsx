@@ -158,10 +158,11 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop Add Listing Button */}
+        
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-4 py-1.5 pr-6.5 rounded-full flex items-center justify-center gap-1 hover:gap-1.5 text-white bg-[#f09712] hover:bg-[#ec6d06e8] hover:scale-105 duration-300 transition-all"
+            className="px-6 py-2.5 pr-8 rounded-full flex items-center justify-center gap-1 font-medium hover:gap-2 text-white bg-[#f09712] hover:bg-[#f09712]/90 hover:scale-105 duration-300 transition-all"
             onClick={() => handleReload("/listing/add-listing")}
           >
             <IoIosAdd size={33} /> Add Listing
