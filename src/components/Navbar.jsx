@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import {
-  AiOutlineMenu,
-  AiOutlineClose,
-  AiOutlineDown,
-  AiOutlineUp,
-} from "react-icons/ai";
-import { MdApartment } from "react-icons/md";
-import { BsFillHousesFill } from "react-icons/bs";
-import { FaBuilding, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { RiLandscapeFill } from "react-icons/ri";
+import { TbMenu, TbX, TbPlus, TbChevronUp, TbChevronDown, TbBuildingSkyscraper, TbHome, TbBuildings, TbMap } from "react-icons/tb";
 import { IoIosAdd } from "react-icons/io";
 import logo from "/dlink-colombo.png";
 
@@ -34,21 +25,23 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-black">
+    <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 2xl:px-0">
         {/* Logo */}
         <NavLink
           to="/"
-          className="flex items-center hover:text-[#f09712] mr-10"
+          className="flex items-center hover:text-orange-400 mr-10"
           onClick={() => handleReload("/")}
         >
           <div className="flex items-center gap-3">
-            <img src={logo} alt="" className="w-14 h-14" />
+            <img src={logo} alt="" className="w-12 h-12" />
             <div className="flex flex-col">
               <h1 className="w-fit flex items-center text-lg font-bold">
                 D-LINK
               </h1>
-              <span className="text-sm font-medium text-[#f09712]">Colombo</span>
+              <span className="text-sm font-medium text-orange-400">
+                Colombo
+              </span>
             </div>
           </div>
         </NavLink>
@@ -69,17 +62,17 @@ const Navbar = () => {
           <li className="relative">
             <button
               onClick={() => setDesktopDropdown(!desktopDropdown)}
-              className={`flex items-center gap-2 ${
+              className={`flex items-center gap-1 ${
                 isPropertyPage
-                  ? "text-[#f09712] font-semibold"
-                  : "hover:text-[#f09712]"
+                  ? "text-orange-400 font-semibold"
+                  : "hover:text-orange-400"
               }`}
             >
               Find Property{" "}
               {desktopDropdown ? (
-                <FaChevronUp size={14} />
+                <TbChevronUp size={20} />
               ) : (
-                <FaChevronDown size={14} />
+                <TbChevronDown size={20} />
               )}
             </button>
             {desktopDropdown && (
@@ -88,39 +81,39 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="flex items-center gap-2 hover:text-[#f09712]"
+                      className="flex items-center gap-2 hover:text-orange-400"
                       onClick={() => handleReload("/property/apartments")}
                     >
-                      <MdApartment size={22} /> Apartments
+                      <TbBuildingSkyscraper size={22} /> Apartments
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/houses"
-                      className="flex items-center gap-2 hover:text-[#f09712]"
+                      className="flex items-center gap-2 hover:text-orange-400"
                       onClick={() => handleReload("/property/houses")}
                     >
-                      <BsFillHousesFill size={20} /> Houses
+                      <TbHome size={20} /> Houses
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/commercial-properties"
-                      className="flex items-center gap-2 hover:text-[#f09712]"
+                      className="flex items-center gap-2 hover:text-orange-400"
                       onClick={() =>
                         handleReload("/property/commercial-properties")
                       }
                     >
-                      <FaBuilding size={20} /> Commercial
+                      <TbBuildings size={20} /> Commercial
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/lands-plots"
-                      className="flex items-center gap-3 hover:text-[#f09712]"
+                      className="flex items-center gap-3 hover:text-orange-400"
                       onClick={() => handleReload("/property/lands-plots")}
                     >
-                      <RiLandscapeFill size={20} /> Lands / Plots
+                      <TbMap size={20} /> Lands / Plots
                     </NavLink>
                   </li>
                 </ul>
@@ -158,23 +151,23 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop Add Listing Button */}
-        
+
         <div className="hidden md:block">
           <NavLink
             to="/listing/add-listing"
-            className="px-6 py-2.5 pr-8 rounded-full flex items-center justify-center gap-1 font-medium hover:gap-2 text-white bg-[#f09712] hover:bg-[#f09712]/90 hover:scale-105 duration-300 transition-all"
+            className="px-5 py-2.5 pr-6 rounded-full flex items-center justify-center gap-1.5 hover:gap-2 font-medium hover:gap-2 text-white bg-orange-400 hover:bg-orange-400/90 hover:scale-105 duration-300 transition-all"
             onClick={() => handleReload("/listing/add-listing")}
           >
-            <IoIosAdd size={33} /> Add Listing
+            <TbPlus size={22} /> Add Listing
           </NavLink>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div
           onClick={handleNav}
-          className="block md:hidden relative z-50 cursor-pointer text-[#f09712]"
+          className="block md:hidden relative z-50 cursor-pointer text-orange-400"
         >
-          {nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
+          {nav ? <TbX size={30} /> : <TbMenu size={30} />}
         </div>
 
         {/* Mobile Sidebar */}
@@ -220,46 +213,46 @@ const Navbar = () => {
                 >
                   Find Property
                 </span>
-                {mobileDropdown ? <FaChevronUp /> : <FaChevronDown />}
+                {mobileDropdown ? <TbChevronUp /> : <TbChevronDown />}
               </button>
               {mobileDropdown && (
                 <ul className="pl-3 mt-4 space-y-4 text-sm">
                   <li>
                     <NavLink
                       to="/property/apartments"
-                      className="block hover:text-[#f09712] border-b border-t border-gray-100 py-4"
+                      className="flex items-center gap-3 hover:text-[#f09712] border-b border-t border-gray-100 py-4"
                       onClick={() => handleReload("/property/apartments")}
                     >
-                      Apartments
+                      <TbBuildingSkyscraper size={22} /> Apartments
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/houses"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
+                      className="flex items-center gap-3 hover:text-[#f09712] border-b border-gray-100 pb-4"
                       onClick={() => handleReload("/property/houses")}
                     >
-                      Houses
+                      <TbHome size={20} /> Houses
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/commercial-properties"
-                      className="block hover:text-[#f09712] border-b border-gray-100 pb-4"
+                      className="flex items-center gap-3 hover:text-[#f09712] border-b border-gray-100 pb-4"
                       onClick={() =>
                         handleReload("/property/commercial-properties")
                       }
                     >
-                      Commercial
+                      <TbBuildings size={20} /> Commercial
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       to="/property/lands-plots"
-                      className="block hover:text-[#f09712]"
+                      className="flex items-center gap-3 hover:text-[#f09712]"
                       onClick={() => handleReload("/property/lands-plots")}
                     >
-                      Lands / Plots
+                      <TbMap size={20} /> Lands / Plots
                     </NavLink>
                   </li>
                 </ul>
@@ -300,7 +293,7 @@ const Navbar = () => {
               className="px-6 py-3 pr-8 rounded-full flex items-center justify-center gap-1 hover:gap-2 text-white bg-[#f09712] hover:bg-[#ec6d06e8] hover:scale-105 duration-300 transition-all"
               onClick={() => handleReload("/listing/add-listing")}
             >
-              <IoIosAdd size={30} /> Add Listing
+              <TbPlus size={30} /> Add Listing
             </NavLink>
           </Link>
         </div>

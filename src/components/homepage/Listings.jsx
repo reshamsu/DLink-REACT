@@ -3,7 +3,7 @@ import Property from "../../assets/modern.webp";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import supabase from "../../config/supabaseClient";
-import { FaBed, FaBath } from "react-icons/fa6";
+import { TbBed, TbBath } from "react-icons/tb";
 
 const rowVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -134,12 +134,12 @@ const Listings = () => {
 
                 <div className="my-2 flex items-center gap-2 text-xs font-semibold flex-wrap line-clamp-1">
                   <p className="flex items-center gap-1.5">
-                    <FaBed size={16} className="text-orange-300" />
+                    <TbBed size={16} className="text-orange-300" />
                     {listing.bedrooms} Bed
                   </p>
                   <span className="text-gray-300">|</span>
                   <p className="flex items-center gap-1.5">
-                    <FaBath size={16} className="text-orange-300" />
+                    <TbBath size={16} className="text-orange-300" />
                     {listing.bathrooms} Bath
                   </p>
                 </div>
