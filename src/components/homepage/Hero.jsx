@@ -54,7 +54,7 @@ const Hero = () => {
           </button>
           <button
             type="submit"
-            className="py-4 px-10 bg-black/60 text-white font-semibold rounded-full h-fit duration-500 transition-transform hover:scale-105 cursor-pointer"
+            className="py-4 px-10 bg-white/60 hover:bg-white/80 text-black font-semibold rounded-full h-fit duration-500 transition-transform hover:scale-105 cursor-pointer"
           >
             Book Now
           </button>
