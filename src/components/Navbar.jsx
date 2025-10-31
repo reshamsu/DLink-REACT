@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { TbMenu, TbX, TbPlus, TbChevronUp, TbChevronDown, TbBuildingSkyscraper, TbHome, TbBuildings, TbMap } from "react-icons/tb";
-import { IoIosAdd } from "react-icons/io";
 import logo from "/dlink-colombo.png";
 
 const Navbar = () => {
@@ -27,7 +26,6 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xs bg-white text-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 2xl:px-0">
-        {/* Logo */}
         <NavLink
           to="/"
           className="flex items-center hover:text-orange-400 mr-10"
@@ -47,7 +45,7 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-10">
+        <ul className="hidden text-[14px] font-medium lg:flex items-center gap-10">
           <li>
             <NavLink
               to="/"
@@ -77,7 +75,7 @@ const Navbar = () => {
             </button>
             {desktopDropdown && (
               <div className="absolute top-full mt-2 left-0 bg-white shadow-2xl rounded-xl p-6 z-40 min-w-[200px] border border-gray-200">
-                <ul className="space-y-4 text-gray-800 font-semibold">
+                <ul className="space-y-4">
                   <li>
                     <NavLink
                       to="/property/apartments"
